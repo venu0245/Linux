@@ -1,7 +1,7 @@
 ### BACKUP & RESTORE
 
 
-* To find the folder were we want to take backup the folder or file,we use 
+* To find the folder were we want to take backup & name to create a bakup folder
 ```
  .du -h /etc
 ``` 
@@ -9,56 +9,61 @@
  
 
 * To take the backup for the folder or file we can
+ ```
  .tar -cvf /backup/read.md /etc
- 
+ ```
+ ![preview](images/back23.PNG)
+
+ ```  
    .backup => folder/directory
-   .read.md => name of the backup
+   .etc.tar=> name of the backup
    .etc => stored data
+   .cd /backup
+ ```  
+ ```
+ . inside the directory we can take the backup
+ ```
+ ![preview](images/back24.PNG)
 
- * we use 
-  .ls
-     read.md
-  
-  .du -h read.md
-     30m  read.md
-* compressing the data by using 'gzip'
-  .gzip read.md 
-    .ls
-     7.4M    read.md.gz
+ .compressing the data by using 'gzip,unzip command 
+ ```
+ .du -h etc.tar.gz
+ ```
+ ![preview](images/back25.PNG) 
+ ```
+ .gzip etc.tar
+ ```
+ ![preview](images/back26.PNG)
+ ![preview](images/back27.PNG)
 
-* uncompressing the data by using 'gunzip'
-    .gunzip read.md.gz
-    .ls
-    .du -h read.md
-      30m read.md
+ ```
+ gunzip extra the data
+ ```
+ ![preview](images/back28.PNG)
 
-* To extract the data we use,
-     .tar -xvf read.md 
-      etc  read.md
-     .du -h etc |tail -l
-       16K     etc/mcelog/triggers
-20K     etc/mcelog
-0       etc/microcode_ctl/ucode_with_caveats
-0       etc/microcode_ctl
-0       etc/smartmontools/smartd_warning.d
-16K     etc/smartmontools
-0       etc/qemu-ga/fsfreeze-hook.d
-4.0K    etc/qemu-ga
-8.0K    etc/nvme
-33M     etc
+```
+. extrating the data and backup
+```
+ ![preview](images/back28.PNG)
 
-* back and together gzip
-  .tar -zcvf /backup/read.tmd /etc
-  .ls 
-    etc  read.md.gz  ream.tmd
-  .du -h read .tmd.gz
-    7.4m  read.tmd
+```
+. take backup together and gzip
+```
+. tar -zcvf /backup/etc.tgz /etc/ |tail -5
+ 
+![preview](images/back29.PNG)
 
-* after back and gzip together we extract
-  .tar -zxvf read.tmd
-   .du -h read.md.gz
-      7.4M    read.md.gz
-   
+```
+.extra the data all
+```
+![preview](images/back30.PNG)
+
+
+
+ 
+ 
+     
+
 
     
  
