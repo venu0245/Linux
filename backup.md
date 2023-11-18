@@ -54,7 +54,7 @@
 ![preview](images/back29.PNG)
 
 ```
-.extra the data all
+.extra the data for each create a file
 ```
 ![preview](images/back30.PNG)
 
