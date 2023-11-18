@@ -1,4 +1,4 @@
-#### MANAGING PROCESS ####
+## MANAGING PROCESS
 
 * 1.interactive process
   2.system process
@@ -36,9 +36,9 @@
  .kill -15 (termination)
 
 * priority:importance,perfernances
-  lower the value & higher the priority
-  higher the priority & lower the value
-  nice range b/w -20 to 20
+   lower the value & higher the priority
+   higher the priority & lower the value
+   nice range b/w -20 to 20
 
 * to change the nice value  
 * login into new session as a root
@@ -50,7 +50,7 @@
 
 
  
- ### Monitoring commands ###
+ ## Monitoring commands 
  1.cpu
  2.memory
  3.i/o

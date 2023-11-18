@@ -1,11 +1,16 @@
-BACKUP & RESTORE
-----------------
+### BACKUP & RESTORE
+
 
 * To find the folder were we want to take backup the folder or file,we use 
+```
  .du -h /etc
+``` 
+ ![preview](images/backup1.PNG)
+ 
 
 * To take the backup for the folder or file we can
  .tar -cvf /backup/read.md /etc
+ 
    .backup => folder/directory
    .read.md => name of the backup
    .etc => stored data
@@ -53,6 +58,7 @@ BACKUP & RESTORE
   .tar -zxvf read.tmd
    .du -h read.md.gz
       7.4M    read.md.gz
+   
 
     
  

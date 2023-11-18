@@ -1,9 +1,9 @@
-#### ADMIN REMOTE SYSTEM #######
----------------------------------
+## ADMIN REMOTE SYSTEM 
+
 * ssh--> secure shell
 * to connect one machine to another machine by using <ssh>
 
-### for password authentication ####
+### for password authentication 
 
 * To connect one machine to another machine
  .<ssh 192.168.10.61>
@@ -12,10 +12,10 @@
   for file
  .scp <_name of the file_> 192.168.10.61:/<_name of the folder_>  (for another machine)
 
- for directory 
+* for directory 
  .scp -r <name of the directory>192.168.10.61:/<_name of the folder_>  (for another machine)
 
-##### No password authentication #####
+### No password authentication 
 * To create a public and private keys we execute command as in (machine 192.168.10.60)
  .ssh-keygen (3time enter)
  .cd .ssh/
@@ -23,7 +23,7 @@
   <id_rsa  id_rsa.pub  known_hosts>
 
 * we can check the .ssh folder for another machine (192.168.10.61)
-* if now ? we create .ssh folder 
+* if now ? as we can create .ssh folder 
  .ssh 192.168.10.61
  .ls -a
  .cd .ssh/
@@ -52,43 +52,46 @@
   .ssh -l 192.168.10.61 <username>
 
 
-## same to create 61 machine to 60 machine ssh-keygen
+### same to create 61 machine to 60 machine ssh-keygen
  .<ssh-keygen> (enter 3times)
 
 * 61 machine to generates the authorized keys (public keys)
  .authorized_keys  id_rsa  id_rsa.pub  known_hosts
 
 * now we can test the machine 60 with asking password
+```
  .ssh 192.168.10.60
  .ssh 192.168.10.60 uptime
  .ssh 192.168.10.60 tail /etc/passwd
  .ssh 192.168.10.60 useradd <username>
-
+```
 ### rsyn (remote syncorization)
 * same thing and parellel on both the machines
 * to tranfer the data 60-->61,61-->60 by ssh
 * create a directory mkdir /apt1 in 60 
 * create a directory mkdir /app in 61
  
- .rsync -avz -e ssh /app 192.168.10.61:/opt1
-   a-->archieve
-   v-->verbos
-   z-->gzip
-   ssh-->trust relation
+* rsync -avz -e ssh /app 192.168.10.61:/opt1
+
+ .a-->archieve
+ .v-->verbos
+ .z-->gzip
+ .ssh-->trust relation
 
 * to add a data in dir/file to transfer 
  .rsync -avz -e ssh  /app 192.168.10.61:/opt1 --dry-run
   dry-run is preview command
 
-#### cronjob ###
-* to run task in cronjob also 
- for example
- .crontab -l
- .crontab -e
+### cronjob 
+* sheduled the task in cronjob for specific time
+
+. crontab -l
+. crontab -e
+
   05 18 13 10 * rsync -avz -e ssh /opt1 192.168.10.61:/web 
-  .wq!
- * now check the time to generate the task 
-  .date
+.wq!
+* now check the time to generate the task 
+.date
   /opt1 on 60 & /web on 61
 
 
