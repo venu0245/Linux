@@ -25,7 +25,7 @@
         allow-query     { localhost; 192.168.10.0/24;  };
  ```       
 
-#### forward zone and revers zone
+#### forward zone and revers zone       
  ```
  .vim /etc/named.rfc1912.zones
  zone "1.0.0.127.in-addr.arpa" IN {

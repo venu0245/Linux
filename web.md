@@ -17,7 +17,8 @@
 
 * ```
   systemctl status httpd
-  systemctl enable --now httpd 
+  systemctl enable --now httpd
+  systemctl reload httpd 
   firewall-cmd --list-all
   firewall-cmd --add-service=httpd --permanent
   firewall-cmd --list-reload
@@ -33,15 +34,40 @@
   . cd /var/www/html
   . vim index.html
   ```
+
+* create a web page in index.html and also altimalate configure in main file
+
   ![preview](images/web4.PNG)
 
-* copying the sample configuration file into main configuration file directory
+* copying the sample configuration file into main configuration file directory called as 'vsw.conf'
 
   ```
   .  cp /usr/share/doc/httpd/httpd-vhosts.conf /etc/httpd/conf.d/vsw.conf
   ```
 
 * vim /etc/httpd/conf.d/vsw.conf   
+  ![preview](images/web5.PNG)
+
+* create a new web pages with `Alias-names`
+* create a directory name called as pg2 in /var/www/html
+
+  ```
+  .vim pg2
+  ```
+  ![preview](images/web6.PNG)
+
+  ```
+  vim /etc/httpd/conf.d/vsw.conf
+  ```
+  ![preview](images/web7.PNG)  
+  ![preview](images/web8.PNG)
+
+* Only working rhel terminal i firefox for not directory 
+
+  ```
+  cd /var/wwww/html
+   index.html
+  ```
 
 
 

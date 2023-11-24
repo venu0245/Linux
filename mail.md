@@ -30,7 +30,7 @@ dnf install postfix* dovecot* -y
   ![preview](images/mail6.PNG)
 
 * vim /etc/dovecot/dovecot.conf
-* delete submission
+* line 24 uncomment & delete submission woard
    ![preview](images/mail7.PNG)
    ![preview](images/mail8.PNG)
   ```
