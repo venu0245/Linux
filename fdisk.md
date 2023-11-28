@@ -1,6 +1,19 @@
 ### HARD DISK PARTITIONS
 
-* make a  hard disk  new partitions 'DOS'
+#### DOC/GPT
+
+* how many fdisk update in kernel 
+  ```
+  cat /proc/partitions
+  ```
+
+* how to update the kernel
+
+  ```
+  partprobe
+  ```
+
+* create a hard disk with  new partitions 
 
 * check how many partitions 
   ```
@@ -27,7 +40,7 @@
   df -h
   df -hT
   ```
-* make a file system for the new partition 
+* formate the file system to the partition ext4/xfs
 
   ![preview](images/disk4.PNG)
 
@@ -59,7 +72,6 @@
   ```
   mount -a
   ```
-
   ![preview](images/disk9.PNG)
 
 * umount & remount
@@ -92,6 +104,38 @@
   ```
   control-D
   ```
+
+
+## with parted command 
+
+*  parted -l 
+   ![preview](images/disk13.PNG)
+
+* create a new partition with parted command
+
+*  ```
+   parted /dev/sda
+   ```   
+  ![preview](images/disk14.PNG)
+  ![preview](images/disk15.PNG)
+
+* to remove the partition 
+  ![preview](images/disk16.PNG)
+
+* formating ,mounting same as above images (images/disk4)
+
+####  GPT
+
+  starting size is previews disk size and end  sizes is it's own  size as per GB/MB
+*  ![preview](images/disk17.PNG)
+   ![preview](images/disk18.PNG)
+
+
+
+   
+  
+
+
 
 
 

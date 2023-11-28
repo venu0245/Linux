@@ -93,7 +93,7 @@
  ```
   
 
-* copy the whole /media directory into one folder
+* copy the whole /media directory into one folder /media
  ```
 * cp -rvf /media /var/ftp/pub/<rhel8>(folder_name)
 ls

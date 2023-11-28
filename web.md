@@ -49,10 +49,13 @@
   ![preview](images/web5.PNG)
 
 * create a new web pages with `Alias-names`
-* create a directory name called as pg2 in /var/www/html
+* create a directory name called as pg2 in /var/www/html in
 
   ```
-  .vim pg2
+  .cd /var/www/html
+  .index.html pg2
+  .cd pg2
+  .vim index.html
   ```
   ![preview](images/web6.PNG)
 
@@ -61,8 +64,11 @@
   ```
   ![preview](images/web7.PNG)  
   ![preview](images/web8.PNG)
+* and also open website with index.html `redirect` http://www.xxxx.com
 
-* Only working rhel terminal i firefox for not directory 
+  ![preview](images/web9.PNG)
+
+* Only working rhel terminal in firefox brower  
 
   ```
   cd /var/wwww/html

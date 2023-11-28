@@ -1,5 +1,7 @@
 ### DNS SERVER 
 
+  https://www.site24x7.com/learn/dns-record-types.html
+
 * converveted <ip-address into names> and <names into ip-address>
 * hostnamectl set-hostname venu60.git.com
 
@@ -12,7 +14,7 @@
 
  ```
 * dnf install bind -y 
-  . vim /var/named.conf
+  . vim /etc/named.conf
     options {
         listen-on port 53 { 127.0.0.1; 192.168.10.60;  };
         listen-on-v6 port 53 { ::1; };
