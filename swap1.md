@@ -1,4 +1,5 @@
 ## SWAP MANAGEMENT SPACE
+ `SWAP (82)`
 
 * minimum  `RAM` size to create a swap in system `4 Gb`
 

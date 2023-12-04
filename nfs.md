@@ -13,7 +13,7 @@
  .192.168.10.60 is server
  .192.168.10.61 is client
 
-### LAB SETUP FROM (192.168.10.60)
+### SETUP FROM (192.168.10.60)
 
 * we create a directory of name </nfs>
  ```
@@ -48,14 +48,14 @@
   .firewall-cmd --list-all
  ``` 
 
-* to test the communication for server to client
+* to test the communicate for server to client
  ```
  .showmount -e 192.168.10.60
      Export list for 192.168.10.60:
       /nfs (everyone)
  ```     
 
-####  LAB SETUP 192.168.10.61 
+#### SETUP 192.168.10.61 
 
 * create a directory name as </nfsc>
  ```
