@@ -19,7 +19,7 @@
      .n
      .t
      .l
-     .82
+     .82(code-linux swap)
      .w
    ```
   ![preview](images/swap0.PNG)
@@ -29,9 +29,9 @@
 * check the sizes of partition `swapon & swapoff` by using `free -h`
   ![preview](images/swap3.PNG)
 
-* permanent mount `vim /etc/fstab`
+* permanent mounting in `vim /etc/fstab`
   ![preview](images/swap4.PNG)       
-* testing the fstab `mount -a`
+* after enter the details in fstab `mount -a`
 
 * removing the swap partition `parted /dev/sda rm 6`
 
@@ -41,7 +41,7 @@
 
 * ```
   dd if=/dev/urandom of=/swapfile bs=1m count=1024
-  
+  m 
   dd-->dumped data
   if-->input for/dev/urandom
   of-->output for /dev/urandom

@@ -19,14 +19,14 @@
   su -
   passwd (as root password)
   ```  
-* root user can lock the normall user (u3)
+* root user can lock the normal user (u3)
   ```
   usermod --help
   usermod -L u3
   ```  
   ![preview](images/user1.PNG)
 
-* root user can lock the normall user (u3) 
+* root user can lock the normal user (u3) 
   ![preview](images/user2.PNG)
 
 * how to check user's lock or unlock
@@ -36,13 +36,16 @@
   ![preview](images/user3.PNG)    
 
 * check the logs
+  ```
+  cat /var/log/secure
+  ```
   ![preview](images/user4.PNG)
 
 * disable the login user `/sbin/nologin`  
   ```
   .S (checking the passwd login for user)
   .s (checking the nologin for user)
-  .usermod -s /sbin/nologin (nologin)
+  .usermod -S /sbin/nologin (nologin)
   .usermod -s /bin/bash (login)
   ```
 * check the user last login password details  
@@ -52,8 +55,14 @@
   chage u3
   ```
  ![preview](images/user5.PNG)
-
-*  when user's are login immediatly display the message 
+ 
+ * to rename the user
+  ```
+  usermod -l <new_name> <old_name>
+  ``` 
+  ![preview](images/user6.PNG)
+  
+*  when user's login immediately display the message 
   ```
   vim /etc/motd
   motd-->message of the day

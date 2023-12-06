@@ -2,7 +2,7 @@
 
 #### DOC/GPT
 
-* how many fdisk update in kernel 
+* how many partitons are update in kernel 
   ```
   cat /proc/partitions
   ```
@@ -13,14 +13,14 @@
   partprobe
   ```
 
-* create a hard disk with  new partitions 
+* create a hard disk with new partitions 
 
 * check how many partitions 
   ```
    fdisk -l
    ```
 
-* make a new partition for extended after than logical create partition 
+* make a new partition first create extended  and after than create logical partition 
 
   ```
   fdisk /dev/sda
