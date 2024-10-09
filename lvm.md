@@ -8,7 +8,7 @@
  ```
 * minium size is to create the physical volume `512 MB`
 * each extend size is `4MB`
-* one extend size is occupies `metadate` stores the `PV'S,VG'S,,LV'S`
+* one extend size is occupies `metadate` stores the `PV'S,VG'S,&,LV'S`
 
 * to calculate the sizes size/4
 
@@ -53,6 +53,11 @@
   ```
 
 ### EXTEND THE SIZE ONE DISK TO ANOTHER DIFFERENT DISK
+* create two physical volume's and 
+* create one volume group
+* create logical volume
+*  to extend the volume group to the physical volume
+* to resize/reduce to the volume group
 
 * `/dev/sda to /dev/sdb`
 
@@ -133,6 +138,13 @@
   ```
   lvchange -a y /dev/testvg/testlv
   ```       
+* Note:-
+ .if we already volume group/logical volume as a name
+ .we can delete that volumes in
+  ```
+  cd /etc/lvm
+  ls
+  ```  
   
 
 

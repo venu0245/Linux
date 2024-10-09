@@ -1,65 +1,101 @@
-SELINUX
----------
+### SELINUX:(security enancement of linux)
+*  modes of selinux:
+  .Enforcing
+  .permissive
+  .disable
+* types:  
+  .discretionary acess control
+  .mandatory access control
+  ![preview](images/selnx.PNG)
+*  to set enforcing/permissive mode
+  ![preview](images/selnx0.PNG)
+* if system reboots/shuntdown automatically changing the enforcing mode
 
-getenforce
+* if we want set permanent modes in selinux configuration file we can changes enforcing/permissive/disable
+  ```
+  vim /etc/selinux/config
+  ```      
+  ![preview](images/selnx1.PNG)
+* commands 
+  ```
+  getenforce
+  setenforce enforcing/permissive/disable or 1 | 0
+  sestatus
+  ```
+* to applying permission on file /directory either publice/httpd/samba access  
 
-setenforce
+  ```
+  touch selinux
+  ls -lZ selinux
+  chcon -t public_content_t selinux
+  ls -lZ selinux
+  restorecon -V selinux (-v file)
+  ```
+  ![preview](images/selnx2.PNG)
+* difference  between files and root file `file /file`
+  ![preview](images/selnx3.PNG)
+* in directory have file to access to serves
+  ```
+  chcon -Rt public_content_t user
+  ```
+  ![preview](images/selnx4.PNG)
+* to remove the access for the directory
+  ```
+  restorecon -R user
+  ```  
+  ![preview](images/selnx5.PNG)
 
-sestatus
+* default context file stored in
+  ```
+   cat /etc/selinux/targeted/contexts/files/file_contexts.local
+  ```  
+* if we give samba share/httpd access to a file
+  ```
+  for <file>
+  semanage fcontext -a -t samba_share_t /venu
+  ls -lZ /venu
+  after than
+  restorecon /venu
+  ```  
+  ![preview](images/selnx6.PNG)
+  ![preview](images/selnx7.PNG)
+*  for directory
+  ```
+  semanage fcontext -a -t httpd_sys_content_t /out1
+  restorecon /out1
+  ls -ldZ /out1
+  cat /etc/selinux/targeted/contexts/files/file_contexts.local
+  ```
+  ![preview](images/selnx8.PNG)
+  ![preview](images/selnx9.PNG)
+* if any application to apply the files/directories to reset 
+the application 
+ ```
+ semanage fcontext -a -t samba_share_t "/web(/.*)?"
+ restorecon /web
+ ls -ldZ /web
+  cat /etc/selinux/targeted/contexts/files/file_contexts.local
+  semanage fcontext --help
+  semanage fcontext -d "/web(/.*)?"
+ ```
+ ![preview](images/selnx13.PNG)
+ ![preview](images/selnx14.PNG)
+#### Boolean:
+  ```
+  on/off
+  true/false
+  0/1
+  ```
+  ![preview](images/selnx10.PNG)
 
-setenforce 1|0 
-   1-->enforcing
-   2-->permissive
-
- to temporvary set for enforcing and premissive mods 
-    setenforce enforcing |permissive
-
- to permanent set for
-    vim /etc/selinux/config
-
-##create a dir. /app
-
- To access the publice content for dir. and files
-   for /dir
-   chcon -t publice_content_t /app
-
-  for /dir in files  
-   chcon -Rt publice_content_t /app
-
-  for restore normal content 
-
-    restorecon -R /app
-
-To access the http,ftp,servers and applications for /dir
-
- cat /etc/selinux/targated/contexts/files/file_contexts.local
-
- ==>semanage fcontexts -a -t shamba_share_t /app
-
- after applying the access to the /dir
-
- ==> restorecon -R /app
-
- to access the httpd for dir in that having the files "/app(/.*)?"
-
-  semanage fcontexts -a -t httpd_sys_content_t "/app(/.*)?"
-
- to access the HTTPD for empty dir /app
-
-semanage fcontext -a -t httpd_content_t /app
-
-
-BOOLEANS: (0,1)
-------------
- semanage boolean -l|grep -i mysql
- 
-  for temporary to connect the on & off 
-
- getsebool -a |grep -i mysql ,ftp,httpd
-
- setsebool mysql_connect_any 1 (on), 0 (off)
+* to connect any server/protocal 
+  ```
+  getsebool -a |grep -i ftp
+  permament mount
+  setsebool -p ftpd_anon_write on
+  semanage boolean -l |grep -i ftp
+  ```  
+  ![preview](images/selnx12.PNG)
   
-  for permanent to connect the on & off
-  setsebool -P mysql_connect_any on & off
 
 

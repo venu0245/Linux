@@ -1,89 +1,87 @@
-# NFS (NETWORK FILE SYSYEM)
+## NFS (NETWORK FILE SYSYEM)
 * port:2049
 * NFS:network file system
- .rpm -q nfs-utils
-* server to client 
-* client is connect to server download and upload data
-* configuration file of nfs
-* .vim /etc/exports
+* rpm -q nfs-utils
+* /etc/exports
 
+### From server side (192.168.10.60)
+* we can setup 
 
-* setup for both machines 192.168.10.60 & 192.168.10.61
-
- .192.168.10.60 is server
- .192.168.10.61 is client
-
-### SETUP FROM (192.168.10.60)
-
-* we create a directory of name </nfs>
+* create a directory name as </nfs>
  ```
  .mkdir /nfs
  .cd /nfs
- .ls
+ .ls -ld /nfs
  .chmod 777 /nfs
  ```
  
-*  connect any machine for server side we can configure 
+*  connect any machine form server to any machine
+* we can configure the file 
+
  ```
- .vim /etc/exports
+  vim /etc/exports
   /nfs 192.168.10.0/24 (rw,sync)
-  .wq!
-  .exportsfs -rv
+  wq!
+  exportsfs -rv
  ``` 
   
 
 * check the nsf-server.service enable/disable
+
  ```
   .systemctl status nfs-server.service
   .systemctl enable --now nfs-server.service
   .systemctl status nfs-server.service
  ```
 
-* add firewall for nfs
- ```
-  .firewall-cmd --list-all
-  .firewall-cmd --add-service=nfs --permanent
-  .firewall-cmd --add-service={mountd,rpc-bind} --permanent
-  .firewall-cmd --reload
-  .firewall-cmd --list-all
- ``` 
+* add services {nfs,mountd rpc-bind}
+  ```
+   .firewall-cmd --list-all
+   .firewall-cmd --add-service=nfs --permanent
+   .firewall-cmd --add-service={mountd,rpc-bind} --permanent
+   .firewall-cmd --reload
+   .firewall-cmd --list-all
+  ``` 
 
-* to test the communicate for server to client
- ```
- .showmount -e 192.168.10.60
-     Export list for 192.168.10.60:
-      /nfs (everyone)
- ```     
+### From client side (192.168.10.61)
 
-#### SETUP 192.168.10.61 
+ to test the communication from client to server
+  ```
+  .showmount -e 192.168.10.60
+      Export list for 192.168.10.60:
+       /nfs (everyone)
+  ```     
 
-* create a directory name as </nfsc>
- ```
- .mkdir /nfsc
- .mount -t nfs 192.168.10.60:/nfs /nfscl
- .mount |tail -4
-   192.168.10.60:/nfs on /nfsc type nfs4
- .cd /nfscl
- .ls
- .umount -f /nfscl
- ```
+* we can setup 
 
- * for permanent mounting 
+* create a directory name as </nfscl
+
+  ```
+  .mkdir /nfsc
+  .mount -t nfs 192.168.10.60:/nfs /nfscl
+  .mount |tail -4
+    192.168.10.60:/nfs on /nfsc type nfs4
+  .cd /nfscl
+  .ls
+  .umount -f /nfscl
+  ```
+
+ #### for permanent mounting 
   .vim /etc/fstab
   ```
     192.168.10.60:/nfs   /nfscl   nfs    defaults 0 0
   .wq!
   ```
-
  .mount -a
  .mount |tail -4
  
+#### for auto mounting
+* we can install a package `autofs`
 
-* for auto mounting we need install autofs
  ```
  .dnf install autofs -y
  .vim /etc/auto.master
-   /- /etc/auto.nfs --timeout 10
+   /- /etc/auto.nfs --timeout=10
  .wq!
  
  .vim /etc/auto.nfs
@@ -114,10 +112,10 @@
 
 
 ### limitation :
- .it can be connected to linux to linux & linux to unix
+* only it can be connected into linux to linux & linux to unix
 
 
-# SAMBA SERVER
+## SAMBA SERVER
 
 ## for linux machine 192.168.10.61
 ## port no: 449
@@ -137,7 +135,7 @@
     root unconfined_u:object_r:default_t
    ``` 
 
-*  apply for samba share access for directory
+*  Set SELinux labels only on files and directories
  ```
  .chcon -t samba_share_t /samba
  .ls -ldZ /samba
@@ -181,7 +179,7 @@
 ;       write list = +staff
  ```
 
-* we can modified the file and uncomment the line after modified 
+* we can modified the file and uncomment the line then after modify
  ```
   [GitShare]
        comment = my private 
@@ -203,24 +201,34 @@
     <PC> right click 
        networkdrives
        \\ip\share-name
-  .username
-  .password
+  .username smb
+  .password samba123
   .disconnect
   ```
+  ![preview](images/smb2.PNG)
+  ![preview](images/smb3.PNG)
+  ![peview](images/smb4.PNG)
+* windows to linux  
+  ![preview](images/smb5.PNG)
+* linux to windows
+  ![preview](images/smb6.PNG)  
+* linux to linux
+  ![preview](images/smb7.PNG)  
 
-
- ### linux machine to linux machine 
+ ### from client side (192.168.10.61) 
 * we can install a package 
+
  ```
   .dnf install samba-client cifs-utils -y
   .dnf install samba-client-libs-4.15.5-5.el8.i686 -y
  ```
-
- .mkdir /samba1
- .cd /samba1
+* create a directory with name as
  ```
- .mount -t cifs //192.168.10.60/GitShare /samba1 -o user=smb  
-```
+   mkdir /sambacl
+   cd /sambacl
+   mount -t cifs //192.168.10.60/GitShare /samba1 -o user=smb  
+ ```
+ ![preview](images/smb1.PNG)
         
 
  

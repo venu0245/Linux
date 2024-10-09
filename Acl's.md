@@ -1,11 +1,12 @@
-### FILE PERMISSIONS
+#### ACCESS CONTROL LIST
+
 ##### USER (U+S)
 * role of passwd command
   ```
   to assigning password for the user
   ```
 
-* three types permission of a file/directory
+* three type of a file/directory
 
   .User
   .Group
@@ -17,8 +18,8 @@
   other -->o+t
   ``` 
 * root can change the password for user
-* normal user can change the password without applying u-s id
-* normal user connot cannot change change the password with applying u+s id 
+* normal user can be change the password without applying u-s id
+* normal user connot be change the password with applying u+s id 
 
 * check the location of the command
 
@@ -79,12 +80,12 @@ which passwd
 
   ```
      chmod o+t /sap
-    [root@venu60 ~]# ls -ld /sap
+     ls -ld /sap
     drwxrwsrwt. 2 root sap 31 Dec  6 09:48 /sap
   ```
 * when we applying `sticky bit (o+t)` for the directory 
 cannot delete the files one to one user
-  ![preview](images/acl8.PNG)
+
 
   ```
   Note:
@@ -98,4 +99,110 @@ cannot delete the files one to one user
   .sgid: both works with files and directories
   .sticky-bit: not works with files and works with directories
   ```
-* sticky-bit only protects the data into the directory   
+* sticky-bit only protects the data into the directory 
+
+
+### FILE PERMISSIONS:
+  ```
+  setfacl
+  getfacl
+  ```
+
+* applying acl's to the users,groups and others
+
+  ```
+  mkdir /acl
+  cd /acl
+  touch file{1..3}
+  ```
+* cd /acl
+  ```
+  [root@venu60 acl]# ls
+   file1  file2  file3
+     [root@venu60 acl]# getfacl file1
+     # file: file1
+     # owner: root
+     # group: root
+     user::rw-
+     group::r--
+     mask::r--
+     other::r--
+
+  ```  
+
+* applying permissions for the user and group in file
+
+  ```
+    setfacl -m u:jones:wx,g:g1:x file1
+     [root@venu60 acl]# getfacl file1
+     # file: file1
+     # owner: root
+     # group: root
+     user::rw-
+     user:jones:-wx
+     group::r--
+     group:g1:--x
+     mask::rwx
+     other::r--
+     
+  ```
+* to remove permission for user and group in file
+  ```
+    setfacl -x u:jones file1
+    getfacl file1
+    # file: file1
+    # owner: root
+    # group: root
+    user::rw-
+    group::r--
+    group:g1:--x
+    mask::r-x
+    other::r--
+
+    setfacl -x g:g1 file1
+    getfacl file1
+    # file: file1
+    # owner: root
+    # group: root
+    user::rw-
+    group::r--
+    mask::r--
+    other::r--
+  ``` 
+* to applying permissions for user group and othe both directory and in files
+
+  ```
+   ls -ld /acl/
+   drwxr-xr-x. 2 root root 45 Dec  8 15:34 /acl/
+    ls -l /acl/
+    total 0
+  -rw-r--r--. 1 root root 0 Dec  8 15:34 file1
+  -rw-r--r--. 1 root root 0 Dec  8 15:34 file2
+  -rw-r--r--. 1 root root 0 Dec  8 15:34 file3
+  ```
+
+
+  ```
+  setfacl -Rm u:jones:rwx,g:g1:wx /acl/
+  getfacl -R /acl
+  ```
+  ![preview](images/acl8.PNG)
+
+*  remove the acl's users,groups and others
+
+  ```
+  setfacl -Rb /acl/
+  getfacl -R /acl
+  ```
+  ![preview](images/acl9.PNG)
+  
+  ```
+   Rx-->user/groups/others
+   Rb-->totall remove 
+   setfacl -Rb /acl
+  ``` 
+
+   
+
+
+  

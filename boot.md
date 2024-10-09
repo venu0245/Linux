@@ -1,109 +1,92 @@
-## Booting Process:
-
-
-* Changing the booting time of the system
-
-* To check the booting timing in the file
-   
-   .grep -i timeout /boot/grub2/grub.cfg
-
-* To configation file to change the boot time
-
- ```   
-   .vim /etc/defaultgrub
- ```    
-
-* After changing the boot time of the we can update the file
-
-```   
-  .grub2-mkconfg -o /boot/grub2/grub.cfg
-```
-* we can check after changing boot time
-```
-  .grep -i timeout /boot/grub2/grub.cfg
-```   
-
-### To changing the graphic to command modes:
-
-
-Login screen: we can observe the screen
-```
- 1.graphic mode 
- 2 command line mode
- ```
-
-* To check the runlevel for graphic mode or command line mode
- ```
- who -r
- ```
-
-* Default runlevel
-  
-  .cat /etc/inittab
-
-* To check the type of run level
-```
-  .systemctl get-default          
-```
-* To change the runlevel to graphic mode to command line mode
-
-```  
- .systemctl set-default runlevel3.target (for runlevel3 is command line mode)
- ```
-  
-  .poweroff to check the terminal
+### Time booting Process:
+* checking kernel details
   ```
-   .systemctl set-default runlevel5.target (for runlevel5 is graphical mode)
+  uname 
+  uname -a
+  uname -r
+  arch
+  rpm -qa kernel
   ```
-  .poweroff to check the terminal
- 
-## LOST THE ROOT PASSWD:
- 
-  .poweron the machine
-* after poweron the machine booting will be starts to press any key uparrow & down arrow to stop the booting process
- ```
- .ctrl a (begining of the line)
- .ctrl e (ending of the line)
- ```
+  ![preview](images/web10.PNG)
+  ![preview](images/boot.PNG)
 
-* press the key 'e' and type
-```
-   ctrl+e for ending of the line  type "rd.break" & "ctrl+x"
-```   
+*  default system boot time
+  ```
+  grep -i /boot/grub2/grub.cfg
+  ```
+   ![preview](images/boot0.PNG)
+*  manually change and set system boot time again login into system bootin processes
+   ```
+   vim /etc/default/grub
+   ``` 
+   ![preview](images/boot1.PNG)
+ * after changes system boot times for permanent
+   ```
+   grub2-mkconfig -o /boot/grub2/grub.cfg
+   ```  
 
-```
- "rd.break" is break the booting
-```
+##### Defaults run levels modes:
   
-* to check the mount point 'rw' permission
-``` 
-   .mount
-   .mount |grep sysroot
-* to change the rw permission     
-  .mount -o remount sysroot -o rw
-  .mount |grep sysroot
-
-* to convervet the ROOT
-  .chroot sysroot
-   .pwd
-   .PASSWD
-   .enter the new passwd twice after that we run the command 
-  .touch /.autorelabel
-    .exit
-    .exit 
+  .command line run level mode
+  .graphical run level mode 
+  ```
+  who -r
+  systemctl get-defaults
+  cat /etc/inittab
   ```  
+  ![preview](images/boot2.PNG)
+* changing run levels graphical mode to command line mode
+  ```
+  vim /etc/inittab
+  systemcl get-default 
+  systemctl set-default runlevel3.target (commandline mode)
+  systemctl set-default runlevel5.target (graphical mode)
+  who -r  
+  ```  
+  ![preview](images/boot3.PNG)
 
-### TROUBLESHOOT FOR INSTALLING BOOT LOADER :
 
-*if boot loader fails we install the booting process in dvd(rhel8)
 
-* choose the dvd in the virtual box in setting 
- .poweroff
+
+#### LOST THE ROOT PASSWD:
+* break the booting by pressing 'e' in the terminal
+  ```
+  rd.break and  press ctrl+x
+  mount |grep sysroot
+  remount -o remount /sysroot -o rw
+  mount |grep sysroot
+  chroot /sysroot
+  passwd
+  touch /.autorelable
+  exit
+
+  ```
+  ![preview](images/boot4.PNG) 
+  ![preview](images/boot5.PNG)
+
+* if root password is successfully updated and not login into terminal we can troubleshoot the disk `/dev/sda`
+  ```
+  .connect dvd into virtual box
+  .troubleshoot
+  .continue 
+  .chroot /mnt/sysroot
+  .grub2-install /dev/sda
+  .exit
+  .poweroff
+  ```
+
+  
+
+#### TROUBLESHOOT FOR INSTALLING BOOT LOADER :
+
+* if boot loader is failed we can boot with dvd
+
+* choose the dvd path in the virtual box setting and connect to it.
 
 * To check the details for last  system booting times
 ```
  .cat /var/log/boot.log
-
+ .poweron
  .Troubleshoot
  .rescure a rhel
   1.continue
@@ -122,12 +105,11 @@ Login screen: we can observe the screen
    ```
 #### Note:if we install boot loader in dvd(rhel8) 
 * grub2-install /dev/sda
-```
-     2.poweron the machime not working the root passwd when (dvd rhel8 inside )
-     3.we uninstall the boot loader in dvd(rhel8)
-     4.grub2-uninstall /dev/sda
-     5.remove the dvd in virtual box setting
-     6.now poweron the machine we login into the terminal and to connect 
-     7.to follow the above steps
-```
+    ```
+     1.if not login into root passwd we connect (dvd rhel8 inside)
+     2.boot with disk `/dev/sda`
+     3.grub2-install /dev/sda
+     4.remove the dvd in virtual box setting
+     5.now poweron the machine we can login into the terminal  
+    ```
      

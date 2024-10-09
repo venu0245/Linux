@@ -1,12 +1,13 @@
 ## SWAP MANAGEMENT SPACE
  `SWAP (82)`
 
-* minimum  `RAM` size to create a swap in system `4 Gb`
+* minimum size of  `RAM` in the local system `4gb`
+* minimum size to create swap partition should be `1gb` 
 
 * ```
   swapon (activate the partition)
   swapoff(de-activate partition) 
-  mkswap (format)
+  mkswap (partition name)
   swap (file-system)
   free -h (checking sizes)
   82 (code-swap) 

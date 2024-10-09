@@ -1,7 +1,7 @@
 ### BACKUP & RESTORE
 
 
-* To find the folder were we want to take backup & name to create a bakup folder
+* To find the folder were we want to take backup & name to create a bakeup folder
 ```
  .du -h /etc
 ``` 
@@ -16,7 +16,7 @@
 
  ```  
    .backup => folder/directory
-   .etc.tar=> name of the backup
+   .etc.tar=> name of create a backup folder 
    .etc => stored data
    .cd /backup
  ```  

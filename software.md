@@ -5,8 +5,9 @@
 * RPM :Redhat package management
 
 *  connect the dvd into virtual box
+ ![preview](images/sftw0.PNG)
  ```
-  ls -a
+  ls /
   mount /dev/sr0 /media (/media default hidden folder)
  ```  
 
@@ -20,179 +21,157 @@
 ```
 
  
-* to install any package we change the director or we directly installed
+* to install any package we change the directories or we can directly installed
 
 * install,update &remove packages:
-```
- . cd /media/BaseOS/Packages/ 
-     rpm -ivh zsh-5.5.1-9.el8.x86_64.rpm  (or)
 
-  rpm -ivh /media/BaseOS/Packages/zsh-5.5.1-9.el8.x86_64.rpm  
+  cd /media/BaseOS/Packages/
+* to check rpm packages installed or not 
+* we can changes the directories or we can installed directly
+  
+ ```
+    rpm -qa <package_name>
+    rpm -qi  <package_name>
+    rpm -ivh zsh-5.5.1-9.el8.x86_64.rpm  (or)
 
- .rpm -Uvh zsh-5.5.1-9.el8.x86_64.rpm
+    rpm -ivh /media/BaseOS/Packages/zsh-5.5.1-9.el8.x86_64.rpm  
 
- to uninstall the package or erase the package
- .rpm -evh zsh-5.5.1-9.el8.x86_64.rpm
-``` 
+    rpm -Uvh zsh-5.5.1-9.el8.x86_64.rpm
+
+    rpm -evh zsh-5.5.1-9.el8.x86_64.rpm
+ ``` 
 
 * to verfiy the install package
- ```
- . rpm -q zsh
-    zsh-5.5.1-9.el8.x86_64
-```    
+  ```
+  rpm -q zsh
+     zsh-5.5.1-9.el8.x86_64
+  ```     
 
 * to query the information the package
- ```
- .rpm -qi zsh
- ```
+  ```
+  .rpm -qip zsh
+  ```
 
-#### Command corrupted 
+#### Command corrupted (Troubleshooting)
 
-* check the path of the both commands (date & uptime)
- .<example>
-* cp /bin/date /bin/uptime
-* to find the path of the command: 
- ```
- .which date
-  /usr/bin/date
-
- .which uptime
-  /usr/bin/uptime
- ``` 
-
-* find the command path in <rpm -qf>
- ```
- .rpm -qf /usr/bin/uptime
- ```
-
-* installed the corrupted command package
- ```
- .rpm -ivh /media/BaseOS/Packages/<command package .rpm --force>
- ```
-
+* if any command not working to find out the path of the command
+  for example:
+  date and mount command
+  ```
+  which date
+  which mount
+  ``` 
+  ![peview](images/sftw1.PNG)
+* to verify the package
+  ```
+  rpm -qf (path of the command)
+  rpm -qf /usr/bin/date
+  coreutils-8.30-12.el8.x86_64
+  ```
+* to install the package of the command
+  ```
+  cd /media/BaseOs/Packages   
+  rpm -ivh coreutils-8.30-12.el8.x86_64
+  ```
+  ![peview](images/sftw2.PNG)
 * to check the how many configuration files
+  ```
+  .rpm -qa |wc -l (configuration files list)
+  .rpm -qlc sudo (query list configuration)
+  .rpm -qld sudo (query list documentation)
+  ```
+
+
+
+ ### YUM OR DNF:(Yellow dog updater)
+ * from server side:
+ * first we install the package vsftpd by using rpm and
+ * check the status of vsftpd
+
+  ```
+  rpm -ivh /media/AppStream/packages/vsftpd
+  systemctl status vsftpd
+  systemctl enable --now vsftpd
+  ```
+* if incase not installed the vsftpd
+  ```
+   cd /var/ftp/pub/venu/
+   rpm -ivh vsftpd
+  ```  
+* we can enable the vsftpd cofig file
+  ```
+  vim /etc/vsftpd/vsftpd.conf
+  # Allow anonymous FTP? (Beware - allowed by default if you comment this out).
+    anonymous_enable=YES
+  ```  
+* check and the firewall
+
  ```
- .rpm -qa |wc -l
- .rpm -qlc sudo 
+ fiewall-cmd --list-all
+ firewall-cmd --add-service=ftp --permanent
+ firwall-cmd --reload
+ services: cockpit dhcpv6-client ftp ssh
+ ```  
+#### From server side
+* To configure the repository file
+ .vim /etc/yum.repos.d/my.repo
+  ```
+  [AppStream]
+  name=Local_AppStream_repo
+  baseurl=file:///var/ftp/pub/venu/AppStream
+  gpgcheck=1
+  enabled=1
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+  [BaseOS]
+  name=Local_BaseOS_repo
+  baseurl=file:///var/ftp/pub/venu/BaseOS
+  gpgcheck=1
+  enabled=1
+  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+  ``` 
+* To check weather file fuctioning or not
+  ```
+  dnf clean all
+  dnf provides zsh/ftp/httpd
+  ``` 
+#### From client side
+* To configure the repository file
  ```
-
-
-
- ### YUM INSTALLATION 
-
-* YUM:yellow dog updater
-* AppStream packages (third party softwares)
-
-* install vsftpd by using rpm 
- ```
-* rpm -ivh rpm -ivh /media/AppStream/ Packages/vsftpd-3.0.3-35.el8.x86_64.rpm
- 
- rpm -qi vsftpd 
- cd /var/ftp/pub
- ls
- ```
-  
-
-* copy the whole /media directory into one folder /media
- ```
-* cp -rvf /media /var/ftp/pub/<rhel8>(folder_name)
-ls
- 
- .check AppStream packages
-
- .cd /media/AppStream/Packages/
- .ls
- ``` 
-
-* repository configuration file
- ```
-  .vim /etc/yum.repos.d/my.repo
-    [AppStream]
- name=Local_Appstream_repo
- baseurl=file:///var/ftp/pub/rhel8/media/AppStream
- enabled=1
+ [AppStream]
+ name=FTP_AppStream_repo
+ baseurl=ftp://192.168.10.60/pub/venu/AppStream
  gpgcheck=1
+ enabled=1
  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
-
-   [BaseOS]
- name=Local_BaseOS_repo
- baseurl=file:///var/ftp/pub/rhel8/media/BaseOS
- enabled=1
+ [BaseOS]
+ name=FTP_BaseOS_repo
+ baseurl=ftp://192.168.10.60/pub/venu/BaseOS
  gpgcheck=1
+ enabled=1
  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-
- .wq!
-
- .yum/dnf clean all
-
+ ```
+ .dnf clean all
  .dnf provides zsh
- .dnf provides ftp
- ```
 
-* to test the ftp is not or not in command prompt
+* to test ftp working or not in command prompt
   .ftp 192.168.10.60
    ftp
    ls
 
-* confiuration file for vsftpd
-
- .vim /etc/vsftpd/vsftpd.conf   
-   nonymous_enable=YES
-  ```
-  .systemctl status vsftpd
-  .systemctl enable --now vsftpd 
-  
-  .firewall-cmd --list-all
-  .firewall-cmd --add-service=ftp --permanent
-  .firewall-cmd --reload
- ```
-
-
-### to configure the client server 192.168.10.60 
-  ```
- .vim /etc/yum/repos.md/cl.repo
-
-  [AppStream]
-  name=FTP_AppStream_repo
-  baseurl=ftp://192.168.10.60/pub/rhel8/AppStream
-   enabled=1
-   gpgcheck=1
-   gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-
-
-   [BaseOs]
-   name=FTP_BaseOS_repo
-   baseurl=ftp://192.168.10.60/pub/rhel8/BaseOS
-   enabled=1
-   gpgcheck=1
-   gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
-
-   .wq!
-
- .dnf clean all
- .dnf provides zsh
-  ```
- .dnf list installed
-* to install packages
-
- ``` 
-* dnf install zsh
-
-* update package
-   .dnf update zsh
-*  to remove package
-   .dnf remove zsh
-  ``` 
-
-* to install group packages
- ```
- .dnf grouplist
+* From client side to install the Packages and information of the package
  
- .dnf groupinfo 'development tools'
- .dnf groupinstall 'development tools'
-
- .dnf groupupdate 'development tools
- .dnf groupremove 'development tools   
- ```
+  ```
+  dnf repolist
+  dnf list
+  dnf list installed
+  dnf install zsh -y (BaseOS)
+  dnf intall httpd -y (AppStream)
+  dnf update httpd/zsh
+  dnf info httpd/zsh
+  dnf remove httpd/zsh
+  dnf grouplist
+  ```
  

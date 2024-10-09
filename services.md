@@ -37,47 +37,42 @@
  ```
 
  * To add FTP,HTTP,TCP in firewall 
- ```
- .firewall-cmd --add-services=ftp --permanent
- .firewall-cmd --reload
- .firewall-cmd --list-all
- ```
- ```
- .firewall-cmd --add-services=tcp --permanent
- .firewall-cmd --reload
- .firewall-cmd --list-all
- ```
+  ```
+  .firewall-cmd --add-services=ftp --permanent
+  .firewall-cmd --reload
+  .firewall-cmd --list-all
+  ```
+  ```
+  .firewall-cmd --add-services=tcp --permanent
+  .firewall-cmd --reload
+  .firewall-cmd --list-all
+  ```
 
-* To add the ports numbers
+#### To set ports numbers
+* to set port numbers into services
   ```
   .firewall-cmd --add-port=2222/ftp --permanent
   .firewall-cmd --reload
   .firewall-cmd --list-all 
   ```
-  ```
+  
 * To remove the services
-```
-   .firewall-cmd --remove-service=tcp   --permanent 
-   .firewall-cmd --reload
-   .firewall-cmd --list-all
+  ```
+  .firewall-cmd --remove-service=tcp   --permanent 
+  .firewall-cmd --reload
+  .firewall-cmd --list-all
   ``` 
 
-* To remove the ports of the services
- ```
- .firewall-cmd --remove-port=2222/tcp --permanent
- .firewall-cmd --reload
- .firewall-cmd --list-all
- ```
-
+  
 * check the service which port number works on 
  
  for example:
  .cockpit.socket
- ```
+  ```
  .systemctl status cockpit.socket
  .systemctl enable cockpit.socket --now
  .systemctl status cockpit.socket
- ```
+  ```
 
 * To check the server which port  works on it
    .https://xxxxxxxx:9090

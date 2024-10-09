@@ -1,23 +1,18 @@
-#####  JOB AUTOMATION ######
-* <cat /etc/crontab>
+#### job automation
+  ```
+  .crontab -l (sheduled jobs list)
+  .crontab -e (sheduled job)
+  .crontab -r (delete the job)
+  .crontab -lu <user_name>  (user job)
+  ```
+* checking cronjob list 
+  ```
+  cd /var/spool/cron
+  ```  
 
-SHELL=/bin/bash
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=root
 
-### For details see man 4 crontabs
 
- Example of job definition:
- # ---------------- minute (0 - 59)
- #  .------------- hour (0 - 23)
- #  |  .---------- day of month (1 - 31)
- #  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
- #  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
-# |  |  |  |  |
-# *  *  *  *  * user-name  command to be executed
 
-* <ls /var/spool/cron>
- .check the whose crontab file used
 
 * <crontab -l>
  . see the list for scheduling the task 
@@ -39,14 +34,14 @@ MAILTO=root
  .vim /etc/deny
  .vim /etc/allow
 
-*same user on deny/allow file only perfered for allow file 
+* same user on deny/allow file only perfered for allow file 
 
 # To display the scheduled task name of the message on screen using <echo "message">>/dev/pts/0
  .tty
    /dev/pts/0
 
 # sleep 10
-* display the print message for to run a task
+* display the print message on screen
 
 # To create a script with (.extention) </cron.sh>
 
