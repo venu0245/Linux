@@ -7,7 +7,7 @@
 ### daemon:postfix,dovecot
 
 
-### lab setup for machine 60
+#### from server side (60)
 
 * we can install postfix and dovecot* packages
 ```
@@ -15,13 +15,19 @@ dnf install postfix* dovecot* -y
 ```
   
 * vim /etc/postfix/main.cf
-```
-  in vim editor
-  .se nu
-  uncomment and comment the line
-  (94,102,118,132,184,283,336) uncomment the lines
-  (135,183)# comment the line 
-```
+  se nu
+  ```
+    94=
+    102=
+    118=
+    132=
+    135=
+    182=
+    183=
+    283=
+    336=
+     
+  ```
   ![preview](images/mail1.PNG)
   ![preview](images/mail2.PNG)
   ![preview](images/mail3.PNG)

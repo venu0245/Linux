@@ -1,9 +1,10 @@
 ## MANAGING PROCESS
+ any activity to run in system is known as `process`
 
-* 1.interactive process
-  2.system process
-  3.automatic process
-* parent process:
+* 1.interactive process:we can interact the process `read,write,copy,delete`
+  2.system process:
+  3.automatic process:automatically starts like `date,time,month`
+* parent process:every process as a parent process except systemd
   child process:
 
   .tty
@@ -13,7 +14,7 @@
 
 * check the kill signals for process
  .kill -l     
-* check th eprocess for normal user
+* check the process for normal user
  .ps -U <username>
 
 *  check the group pid 

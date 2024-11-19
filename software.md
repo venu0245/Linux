@@ -4,11 +4,12 @@
 
 * RPM :Redhat package management
 
-*  connect the dvd into virtual box
+*  connect Rhel-dvd in virtual box in that optical drive
  ![preview](images/sftw0.PNG)
+* mount the dvd path hidden folder or manual folder 
  ```
   ls /
-  mount /dev/sr0 /media (/media default hidden folder)
+  mount /dev/sr0 /media (/media is default hidden folder)
  ```  
 
 * change the directory to /media
@@ -20,8 +21,7 @@
  .ls
 ```
 
- 
-* to install any package we change the directories or we can directly installed
+ * to install any package we change the directories or we can directly installed
 
 * install,update &remove packages:
 
@@ -39,9 +39,11 @@
     rpm -Uvh zsh-5.5.1-9.el8.x86_64.rpm
 
     rpm -evh zsh-5.5.1-9.el8.x86_64.rpm
+ 
  ``` 
 
 * to verfiy the install package
+
   ```
   rpm -q zsh
      zsh-5.5.1-9.el8.x86_64
@@ -54,27 +56,27 @@
 
 #### Command corrupted (Troubleshooting)
 
-* if any command not working to find out the path of the command
+* if any command not working or corrcupted 
   for example:
-  date and mount command
+  date and mount commands
+
   ```
   which date
+  /usr/bin/date
   which mount
+  /usr/bin/mount
   ``` 
+
   ![peview](images/sftw1.PNG)
-* to verify the package
+*  find the path of the corrcupted command
+     
   ```
-  rpm -qf (path of the command)
-  rpm -qf /usr/bin/date
-  coreutils-8.30-12.el8.x86_64
-  ```
-* to install the package of the command
-  ```
-  cd /media/BaseOs/Packages   
-  rpm -ivh coreutils-8.30-12.el8.x86_64
+  cd /media/BaseOs/Packages
+  rpm -qf /usr/bin/mount   
+  rpm -ivh coreutils-8.30-12.el8.x86_64.rpm --force
   ```
   ![peview](images/sftw2.PNG)
-* to check the how many configuration files
+* check how many configuration files
   ```
   .rpm -qa |wc -l (configuration files list)
   .rpm -qlc sudo (query list configuration)
@@ -84,23 +86,24 @@
 
 
  ### YUM OR DNF:(Yellow dog updater)
- * from server side:
- * first we install the package vsftpd by using rpm and
- * check the status of vsftpd
+ 
+ #### Lab set-up on server side
+ * install the package vsftpd by using rpm 
+ * check the status of vsftpd.service
 
   ```
+  cd /media/AppStream/packages/
   rpm -ivh /media/AppStream/packages/vsftpd
   systemctl status vsftpd
-  systemctl enable --now vsftpd
+  systemctl enable --now vsftpd.service
   ```
-* if incase not installed the vsftpd
-  ```
-   cd /var/ftp/pub/venu/
-   rpm -ivh vsftpd
-  ```  
-* we can enable the vsftpd cofig file
-  ```
+ * copy the whole mount directory into one directory 
+    ```
+    cp -rvf /media /var/ftp/pub/rhel8
+    ```
+  
   vim /etc/vsftpd/vsftpd.conf
+  ```
   # Allow anonymous FTP? (Beware - allowed by default if you comment this out).
     anonymous_enable=YES
   ```  
@@ -113,7 +116,7 @@
  services: cockpit dhcpv6-client ftp ssh
  ```  
 #### From server side
-* To configure the repository file
+* configure the repository file
  .vim /etc/yum.repos.d/my.repo
   ```
   [AppStream]
@@ -131,13 +134,13 @@
   gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
   ``` 
-* To check weather file fuctioning or not
+*  check weather file fuctioning or not
   ```
   dnf clean all
   dnf provides zsh/ftp/httpd
   ``` 
 #### From client side
-* To configure the repository file
+* configure the repository file
  ```
  [AppStream]
  name=FTP_AppStream_repo
@@ -161,7 +164,10 @@
    ftp
    ls
 
-* From client side to install the Packages and information of the package
+*  AppStream
+   installing packages only for both server and client machines
+   BaseOs
+   installing packages only for server machine 
  
   ```
   dnf repolist

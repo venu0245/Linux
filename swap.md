@@ -36,13 +36,13 @@
 
 * removing the swap partition `parted /dev/sda rm 6`
 
-### create a swapfile
+### creating a swapfile
 
 *  df -h /swapfile
 
 * ```
-  dd if=/dev/urandom of=/swapfile bs=1m count=1024
-  m 
+  dd if=/dev/urandom of=/swapfile bs=1M count=1024
+
   dd-->dumped data
   if-->input for/dev/urandom
   of-->output for /dev/urandom
@@ -52,6 +52,7 @@
   ![preview](images/swap5.PNG)
 
   ```
+  swapon /swapfile
   chmod 600 /swapfile
   mkswapfile /swapfile
   swapon /swapfile

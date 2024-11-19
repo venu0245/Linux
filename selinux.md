@@ -22,15 +22,20 @@
   setenforce enforcing/permissive/disable or 1 | 0
   sestatus
   ```
-* to applying permission on file /directory either publice/httpd/samba access  
+* applying permissions on files /directorys either publice/httpd/samba access  
 
   ```
   touch selinux
   ls -lZ selinux
   chcon -t public_content_t selinux
   ls -lZ selinux
-  restorecon -V selinux (-v file)
   ```
+* to remove the permission of the file
+* in the directory have files to remove the permissions
+  ```
+  restorecon -V <name_file>
+  restorecon -Rv <name_file/dir.> 
+  ```  
   ![preview](images/selnx2.PNG)
 * difference  between files and root file `file /file`
   ![preview](images/selnx3.PNG)

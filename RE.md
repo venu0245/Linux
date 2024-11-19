@@ -125,7 +125,23 @@
 
   --------- 
   ```
-
+* in a single directory have a multiple files
+ example:
+  ```
+  mkdir app
+  touch file{1..4}
+  ```
+ * to check the app in the files
+  `ls -lZ app`
+* give same permission for multiple files
+  ```
+  chmod -R 777 app
+  ```   
+* get default permission for directory/file by based on umask value `022`
+  ```
+  dir-->755
+  file-->644
+  ```  
 
 
    

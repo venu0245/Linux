@@ -13,14 +13,14 @@
   partprobe
   ```
 
-* create a hard disk with new partitions 
+* create a new partitions 
 
 * check how many partitions 
   ```
    fdisk -l
    ```
 
-* make a new partition first create extended  and after than create logical partition 
+* make a new partition first create extended partition  and after than create logical partitions 
 
   ```
   fdisk /dev/sda
@@ -35,7 +35,7 @@
   ```
   ![preview](images/disk3.PNG)
   ```
-  lsblk -f
+  lsblk -f -->shows what type of partitio and which type of file system attached
   blkid
   df -h
   df -hT
@@ -68,7 +68,7 @@
   defaults-->mount option
   0 0-->dumping,check squence (fsck)
   ```
-  
+* after permanent mounting we execute  
   ```
   mount -a
   ```
@@ -80,7 +80,9 @@
   mount /dev/sda5
   ```
 
-* if some user login into our directory,if we umount the directory as a root
+* if someone user login into mount directory,
+* as a root user when we umount the directory,mount directory will not be umount
+* we can be check it out who inside the directory
 
   ![preview](images/disk10.PNG)
 
@@ -99,13 +101,27 @@
  ```
  ![preview](images/disk11.PNG)
 
-* in fstab by mistake we enter wrong and save ,if we poweron the machine type `control-D login & fix the error
+* forcefully to remove the user from directory
+ ```
+ fuser -ck /<directory_name>
+ ```
+* permanent mounting in fstab
+  vim /etc/fstab
+  ```
+ 
+  UUID      mount<directory>     filesystem <ext4/xs>  defaults(mount option)  0 0(dumping,check sequence fsck)
 
   ```
-  control-D
+* after permanent mounting,we execute a command as 
   ```
-
-
+  mount -a
+  ```
+* troubleshoot in `fstab` when enter the wrong data 
+* when we poweron the machine system will be booting then
+* skip the booting 
+  ```
+  CONTROL-D
+  ```
 ## with parted command 
 
 *  parted -l 

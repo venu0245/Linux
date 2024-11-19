@@ -33,7 +33,7 @@ connected to the system. Examples are ifcfg-enp0s3
   ```
   vim /etc/reslov.conf
   ```
-*  the file keeps the addresess the dns server to which client will be access conect for resloving hostname to ip's  
+*  the file keeps the addresess the dns server to which client will be access connect for resloving hostname to ip's  
 
 
 #### NMCLI (network manager command line interface)
@@ -44,33 +44,35 @@ connected to the system. Examples are ifcfg-enp0s3
    nmcli con add con-name linux ifname enp0s8 type ethernet ipv4 method manual ipv4.addresses 192.168.10.60/24 ipv4.gateway 192.168.10.1 auto connection no
    nmcli con up linux
    ```
-* to check ethernet adapters
+*  check ethernet adapters
   ```
   nmcli con show
   ```
   ![preview](images/nmcli.PNG)   
-* to add one more adapter in virtualbox
+* add one more adapter in virtualbox
   ![preview](images/nmcli0.PNG)
   ![preview](images/nmcli1.PNG)
   ![preview](images/nmcli2.PNG)
-* to activate the connection names as `mycon`  
+* activate the connection names as `mycon`  
   ```
   nmcli con up mycon
   ```
   ![preview](images/nmcli3.PNG)
 * check the status of gateway
+  
   ```
-  netstat -nr
+  netstat -nr :shows which ip is connected to which type of adapter
   ``` 
   ![preview](images/nmcli4.PNG)
   ![preview](images/nmcli5.PNG)
-*  to check the of adapter by using `ethtool`
+*  check the adapter speed  by using `ethtool`
+  
   ```
   ethtool enp0s3 |grep -i speed
   ```  
   ![preview](images/nmcli6.PNG)
 
-* to modified the connection and delete the connection
+*  modified the connection and delete the connection
   ```
   nmcli con mod venu connection.autoconnect yes ipv4.addresses
   192.168.10.65/24
@@ -79,9 +81,9 @@ connected to the system. Examples are ifcfg-enp0s3
   ```  
   ![preview](images/nmcli7.PNG)
 
-  ```
-  nmtui (network manager test user interfer)
-  ```
+   ```
+   nmtui (network manager test user interfer)
+   ```
   ![preview](images/nmcli8.PNG)
 
    [Refer](https://www.interserver.net/tips/kb/network-bonding-types-network-bonding/)
@@ -90,7 +92,7 @@ connected to the system. Examples are ifcfg-enp0s3
 
   * teamd:is responsible for activate
   * teamdctl:says type of config
-  * runner:
+  *  runner:
     .mode0:roung-robin
     .mode1:active-backup
     .mode2:load-balance
@@ -101,7 +103,7 @@ connected to the system. Examples are ifcfg-enp0s3
     .nmcli dev status
     ```  
     ![preview](images/nmcli9.PNG)
-  * to add ip-address of team0
+  * add ip-address of team0
     ```
     nmcli con mod team0 connection.ipv4.method manual ipv4.addresses 192.168.10.90/24
     nmcli con show team0

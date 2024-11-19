@@ -52,7 +52,7 @@
   lvremove test1lv
   ```
 
-### EXTEND THE SIZE ONE DISK TO ANOTHER DIFFERENT DISK
+### EXTEND THE VOLUME SIZES ONE DISK TO ANOTHER DIFFERENT DISK
 * create two physical volume's and 
 * create one volume group
 * create logical volume
