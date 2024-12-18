@@ -1,5 +1,5 @@
 ### NETWORKING:
-* networking: it is a connection b/w two or machines to communicate each other 
+* networking:  connection b/w two or machines to communicate each other 
 
 #### Basic requirments:
  .NIC (network interface controller)
@@ -28,7 +28,7 @@ connected to the system. Examples are ifcfg-enp0s3
   ```
   vim /etc/hosts
   ```
-* this is responsible for hostnames into ip's
+* responsible for hostnames into ip's
 
   ```
   vim /etc/reslov.conf
@@ -41,7 +41,7 @@ connected to the system. Examples are ifcfg-enp0s3
 *  ```
    nmcli 
    nmcli con show
-   nmcli con add con-name linux ifname enp0s8 type ethernet ipv4 method manual ipv4.addresses 192.168.10.60/24 ipv4.gateway 192.168.10.1 auto connection no
+   nmcli con add con-name `linux` ifname enp0s8 type ethernet ipv4 method manual ipv4.addresses 192.168.10.60/24 ipv4.gateway 192.168.10.1 auto connection no
    nmcli con up linux
    ```
 *  check ethernet adapters
@@ -53,6 +53,7 @@ connected to the system. Examples are ifcfg-enp0s3
   ![preview](images/nmcli0.PNG)
   ![preview](images/nmcli1.PNG)
   ![preview](images/nmcli2.PNG)
+  
 * activate the connection names as `mycon`  
   ```
   nmcli con up mycon
@@ -103,7 +104,7 @@ connected to the system. Examples are ifcfg-enp0s3
     .nmcli dev status
     ```  
     ![preview](images/nmcli9.PNG)
-  * add ip-address of team0
+  * add ip-address of connection name
     ```
     nmcli con mod team0 connection.ipv4.method manual ipv4.addresses 192.168.10.90/24
     nmcli con show team0

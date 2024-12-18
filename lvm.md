@@ -132,6 +132,7 @@
 * if lv delete and restore again
     ```
     cd /etc/lvm/archieve
+    ls -ltr
     vgcfgrestore -t testvg -f testvg_00009-960783674.vg 
     ```
 * to activate for lvm

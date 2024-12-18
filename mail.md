@@ -1,4 +1,4 @@
-# MAIL SERVER
+## MAIL SERVER
 
 ### port.no:25 smtp
 ### packages:postfix and dovecot
@@ -7,9 +7,9 @@
 ### daemon:postfix,dovecot
 
 
-#### from server side (60)
+#### lab set-up on server side (60)
 
-* we can install postfix and dovecot* packages
+*  install postfix and dovecot* packages
 ```
 dnf install postfix* dovecot* -y
 ```
@@ -17,15 +17,15 @@ dnf install postfix* dovecot* -y
 * vim /etc/postfix/main.cf
   se nu
   ```
-    94=
-    102=
-    118=
-    132=
-    135=
-    182=
-    183=
-    283=
-    336=
+    94=venu60.git.com-un-comment
+    102=git-un-comment
+    118=un-comment
+    132=un-comment
+    135=comment
+    183=comment
+    184=un-comment
+    283=192.168.10.60 un-comment
+    336=venu60.git.com
      
   ```
   ![preview](images/mail1.PNG)
@@ -36,7 +36,7 @@ dnf install postfix* dovecot* -y
   ![preview](images/mail6.PNG)
 
 * vim /etc/dovecot/dovecot.conf
-* line 24 uncomment & delete submission woard
+* line number 24-uncomment & delete submission word
    ![preview](images/mail7.PNG)
    ![preview](images/mail8.PNG)
   ```
@@ -52,29 +52,29 @@ dnf install postfix* dovecot* -y
 
   ```
   ![preview](images/mail10.PNG)
-
-  ``` 
+ 
   .cd /var/named
   .vim /var/named/my.flz  
-  ``` 
+  
    ![preview](images/mail12.PNG)
+   ```
+   nslookup git.com
+   ```
    ![preview](images/mail15.PNG)
 
-   ```
-   .dnf install mail* -y
-   ```
-   ![preview](images/mail16.PNG)
- 
-
- ### from another machine 61
- #### lab-setup
+  
+  * dnf install mail* -y
+   
+ ### lab set-up machine 61
+  
 
 * dnf install postfix mailx -y
- ```
- .vim /etc/postfix/main.cf
  
- (132,336) uncomment the line
- (135)# comment the the line
+* vim /etc/postfix/main.cf
+ ```
+ 132=un-comment
+ 135=comment
+ 336=venu60.git.com un-comment
  ``` 
  ![preview](images/mail17.PNG)
 
@@ -82,12 +82,13 @@ dnf install postfix* dovecot* -y
   
 
 * systemctle enable --now postfix
+
   ![preview](images/mail14.PNG)
+
  ```
  firewall-cmd --add=service=smtp --permanent
  firewall-cmd --reload  
  firewall-cmd --list-all
-
  ```
  ![preview](images/mail18.PNG)
 

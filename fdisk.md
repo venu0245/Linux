@@ -3,17 +3,19 @@
 #### DOC/GPT
 
 * how many partitons are update in kernel 
+
+* SCSI drive will be shown as /dev/sda
   ```
   cat /proc/partitions
   ```
 
-* how to update the kernel
+*  update the kernel
 
   ```
   partprobe
   ```
 
-* create a new partitions 
+* create a partitions with fdisk 
 
 * check how many partitions 
   ```
@@ -34,32 +36,34 @@
   fdisk /dev/sda
   ```
   ![preview](images/disk3.PNG)
+
   ```
-  lsblk -f -->shows what type of partitio and which type of file system attached
-  blkid
-  df -h
-  df -hT
+  lsblk -f = it's shows file-system and mount-point directory
+  blkid = it's shows every uuid for partition /dev/sda (1,2,3...)
+  df -h = 488M  780K  452M   1% /test
+  df -hT = /dev/sda5      ext4      488M  780K  452M   1% /test
   ```
-* formate the file system to the partition ext4/xfs
+* format the file system to the partition ext4/xfs /dev/sda5
 
   ![preview](images/disk4.PNG)
 
-* mount with the directory with partition & create a new directory with names as /test
+* create a new directory
+* mount the directory with partition number /dev/sda 
 
   ```
   mount /dev/sda5 /test
   ```
   ![preview](images/disk5.PNG)
+* mount |tail -5  
   ![preview](images/disk6.PNG) 
 
-* make a permanent mounting for a new partition fstab
+* make a permanent mounting for a new partition in  `fstab`
 
-  ```
-  vim /etc/fstab
-  ```
+  
+*  vim /etc/fstab
+  
   ![preview](images/disk7.PNG)
   ![preview](images/disk8.PNG)
-* after permanent mounting  
 
   ```
   UUID-->device name
@@ -68,7 +72,8 @@
   defaults-->mount option
   0 0-->dumping,check squence (fsck)
   ```
-* after permanent mounting we execute  
+* mention uuid, dir, ext4/xfs, defaults 0 0
+* after than we execute the command
   ```
   mount -a
   ```
@@ -80,49 +85,49 @@
   mount /dev/sda5
   ```
 
-* if someone user login into mount directory,
-* as a root user when we umount the directory,mount directory will not be umount
-* we can be check it out who inside the directory
-
-  ![preview](images/disk10.PNG)
-
-* check the who is inside the directory 
-
+* someone user login into mount directory, it can be editing the mount directory in that files 
+ 
  ```
  lsof /test
  ```
- ![preview](images/disk12.PNG)
+  ![preview](images/disk10.PNG)
 
-* send the message to user who login into directory `ctrl+d` is sending message to the user
+  ![preview](images/disk12.PNG)
 
+* send the message to the user logout for the directory
+ 
  ```
  write venu
  ctrl+d
  ```
  ![preview](images/disk11.PNG)
 
-* forcefully to remove the user from directory
+* forcefully to remove the user from mount directory
  ```
  fuser -ck /<directory_name>
+ ck-current activities
  ```
 * permanent mounting in fstab
   vim /etc/fstab
   ```
- 
-  UUID      mount<directory>     filesystem <ext4/xs>  defaults(mount option)  0 0(dumping,check sequence fsck)
+  UUID      mount<directory>     filesystem <ext4/xs>  
+  
+  defaults(mount option)  0 0(dumping,check sequence fsck)
 
   ```
 * after permanent mounting,we execute a command as 
   ```
   mount -a
   ```
-* troubleshoot in `fstab` when enter the wrong data 
+* troubleshoot in `fstab` when enter the wrong data in fstab
 * when we poweron the machine system will be booting then
+* poweron
 * skip the booting 
   ```
   CONTROL-D
+  vim /etc/fstab
   ```
-## with parted command 
+### parted command 
 
 *  parted -l 
    ![preview](images/disk13.PNG)

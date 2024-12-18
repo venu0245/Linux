@@ -7,7 +7,8 @@
 * port no:53
 * configuration file:/etc/named.rfc1912.zones 
                      :/etc/named.conf
-
+*                    :/etc/reslov.conf
+* dnf install bind -y
 
  .vim /etc/named.conf
 
@@ -174,4 +175,4 @@ venu62  A      192.168.10.62
   
  ```
  ![preview](images/dns6.PNG)
-  
+

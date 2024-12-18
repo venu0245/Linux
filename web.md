@@ -27,11 +27,10 @@
   ![preview](images/web1.PNG)
   ![preview](images/web2.PNG)
   ![preview](images/web3.PNG)
-* after add fireall and service,we can check on any brower
-  ```
+* after add firewall and enable the service,can check on any brower
+  
   http://192.168.10.60
-  ```  
-
+    
 * create a own website 
   
   ```
@@ -39,7 +38,7 @@
   . vim index.html
   ```
 
-* create a web page in index.html and also altimalate configure in main file
+* create a web page in index.html and also altimalately configure in main file
 
   ![preview](images/web4.PNG)
 
@@ -83,7 +82,7 @@
     CustomLog "/var/log/httpd/vnu-access_log" common
      </VirtualHost>
    ```
-* Redirect means we can add any webste with own alias names
+* Redirect means we can add any webste with own Alias names
   
 * Only working rhel terminal in firefox brower  
   
@@ -91,7 +90,7 @@
   cd /var/wwww/html
    index.html
   ```
-### PORT BASED WEBHOSTING
+#### PORT BASED WEBHOSTING
 
 * ```
   cd /var/www
@@ -133,9 +132,71 @@
   firewall-cmd --list-all
   systemctl reload httpd.service
   ```
+
+  ![preview](images/web12.PNG)
 * check which port number are specified 
-  ```netstat -ntlp |grep -i httpd
+  
   ```
+  netstat -ntlp |grep -i httpd
+  ```
+
+#### Named-based hosting 
+* need lap-setup for dns configuration
+ 
+ 
+ ```
+ cd /var/named
+ vim flz
+
+ $TTL 1D
+@       IN SOA venu60.git.com.  root.git.com. (
+                                        12122024; serial
+                                        1D      ; refresh
+                                        1H      ; retry
+                                        1W      ; expire
+                                        3H )    ; minimum
+        NS      venu60.git.com.
+
+venu60  A   192.168.10.60
+gitweb  CNAME  venu60
+
+ ``` 
+
+ ![preview](images/web13.PNG) 
+* systemctl reload named.service
+* nslookup gitweb 
+ ![preview](images/web14.PNG)
+ ```
+ /etc/httpd/conf.d/test2
+ ```
+ ![preview](images/web15.PNG)
+* systemctl reload named.service
+
+#### OPEN-SSL
+* dnf install mod_ssl -y
+
+ ```
+ .openssl req-x509 -nodes -days 365 -newkey rsa:2048 -keyout server.key -out server.crt
+  
+ .ls /etc/pki/tls/
+  cert.pem  certs  ct_log_list.cnf  misc  openssl.cnf  private
+
+ .ls /etc/pki/tls/certs
+  ca-bundle.crt  ca-bundle.trust.crt  localhost.crt  server.crt  server.key
+  
+ .cp server.crt /etc/pki/tls/certs
+ .cp server.key /etc/pki/tls/private
+
+ ```
+* reload the service and https into firewall 
+ ```
+ systemctl reload httpd
+ firewall-cmd --add-service=https --permanent
+ firewall-cmd --reload
+ ```
+ ![preview](images/web17.PNG)
+ ![preview](images/web18.PNG)
+ ![preview](images/web16.PNG)
 
 
 

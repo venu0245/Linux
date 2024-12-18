@@ -1,14 +1,14 @@
 ### BACKUP & RESTORE
 
 
-* To find the folder were we want to take backup & name to create a bakeup folder
+* find the folder were we want to take a backup & create a name backup file
 ```
  .du -h /etc
 ``` 
  ![preview](images/backup1.PNG)
  
 
-* To take the backup for the folder or file we can
+*  take the backup for the folder
  ```
  .tar -cvf /backup/read.md /etc
  ```
@@ -57,6 +57,12 @@
 .extra the data for each create a file
 ```
 ![preview](images/back30.PNG)
+
+* take a backup to generate another folder
+
+```
+tar -xvf etc.tar <backup_floder>
+```
 
 
 

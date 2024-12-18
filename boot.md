@@ -49,7 +49,7 @@
 
 
 #### LOST THE ROOT PASSWD:
-* break the booting by pressing 'e' in the terminal
+* break the booting by pressing `e` in the terminal
   ```
   rd.break and  press ctrl+x
   mount |grep sysroot
