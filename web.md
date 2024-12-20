@@ -90,7 +90,7 @@
   cd /var/wwww/html
    index.html
   ```
-#### PORT BASED WEBHOSTING
+#### PORT BASED WEB-HOSTING
 
 * ```
   cd /var/www

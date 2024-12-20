@@ -117,7 +117,7 @@ venu62  A      192.168.10.62
 
    $TTL 1D
 @       IN SOA venu60.git.com. root.git.com. (
-                                        20231115        ; serial
+                                        20231115; serial
                                         1D      ; refresh
                                         1H      ; retry
                                         1W      ; expire
@@ -141,6 +141,7 @@ venu62  A      192.168.10.62
  .firewall-cmd --reload
  .firewall-cmd --list-all
  ```
+
  ```
  .systemctl status named
  .systemctl enabled --now named
