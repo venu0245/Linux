@@ -105,7 +105,7 @@
   ```
   ![preview](images/lvm14.PNG)
 
-### to move the data one pv to anothother pv
+### move the data one pv to anothother pv
 * pvmove /dev/sda7 /dev/sdb4
   ![preview](images/lvm15.PNG) 
   ```

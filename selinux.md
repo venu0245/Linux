@@ -22,7 +22,7 @@
 
 * if system reboots/shuntdown automatically changing the enforcing mode
 
-* permanent mode
+* permanent change:
 
   ```
   vim /etc/selinux/config

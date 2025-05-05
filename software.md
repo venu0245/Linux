@@ -1,123 +1,107 @@
-## SOFTWARE MANAGEMENT 
+### SOFTWARE MANAGEMENT:
 
-### RPM & YUM(DNF) 
+#### RPM & YUM(DNF): 
 
 * RPM :Redhat package management
 
 *  connect Rhel-dvd in virtual box in that optical drive
  ![preview](images/sftw0.PNG)
+
 * mount the dvd path hidden folder or manual folder 
- ```
-  ls /
-  mount /dev/sr0 /media (/media is default hidden folder)
- ```  
+ 
+*  ls /
+*  mount /dev/sr0 /media (/media is default hidden folder)
+  
+* change the directory into /media folder
 
-* change the directory to /media
-```
- .cd /media
- .ls
+* cd /media
+* ls
   AppStream & BaseOS 
- .cd /media/BaseOS/Packages/
- .ls
-```
+* cd /media/BaseOS/Packages/
+* ls
 
- * to install any package we change the directories or we can directly installed
+* install any package we change the directories or we can directly installed
 
 * install,update &remove packages:
 
-  cd /media/BaseOS/Packages/
-* to check rpm packages installed or not 
+* cd /media/BaseOS/Packages/
+* check rpm packages installed or not 
 * we can changes the directories or we can installed directly
   
- ```
-    rpm -qa <package_name>
-    rpm -qi  <package_name>
-    rpm -ivh zsh-5.5.1-9.el8.x86_64.rpm  (or)
-
-    rpm -ivh /media/BaseOS/Packages/zsh-5.5.1-9.el8.x86_64.rpm  
-
-    rpm -Uvh zsh-5.5.1-9.el8.x86_64.rpm
-
-    rpm -evh zsh-5.5.1-9.el8.x86_64.rpm
+* rpm -qa <package_name>
+* rpm -qi  <package_name>
+* rpm -ivh zsh-5.5.1-9.el8.x86_64.rpm  (or) 
+* rpm -ivh /media/BaseOS/Packages/zsh-5.5.1-9.el8.x86_64.rpm 
+* rpm -Uvh zsh-5.5.1-9.el8.x86_64.rpm
+* rpm -evh zsh-5.5.1-9.el8.x86_64.rpm
  
- ``` 
-
-* to verfiy the install package
-
-  ```
-  rpm -q zsh
-     zsh-5.5.1-9.el8.x86_64
-  ```     
-
-* to query the information the package
-  ```
-  .rpm -qip zsh
-  ```
-
-#### Command corrupted (Troubleshooting)
+* verfiy the install package
+  
+* rpm -q zsh
+  zsh-5.5.1-9.el8.x86_64
+       
+* query the information the package
+  
+* rpm -qip zsh
+  
+#### Command corrupted: (Troubleshooting)
 
 * if any command not working or corrcupted 
-  for example:
-  date and mount commands
-
-  ```
-  which date
-  /usr/bin/date
-  which mount
-  /usr/bin/mount
-  ``` 
-
-  ![peview](images/sftw1.PNG)
-*  find the path of the corrcupted command
-     
-  ```
-  cd /media/BaseOs/Packages
-  rpm -qf /usr/bin/mount   
-  rpm -ivh coreutils-8.30-12.el8.x86_64.rpm --force
-  ```
-  ![peview](images/sftw2.PNG)
-* check how many configuration files
-  ```
-  .rpm -qa |wc -l (configuration files list)
-  .rpm -qlc sudo (query list configuration)
-  .rpm -qld sudo (query list documentation)
-  ```
-
-
-
- ### YUM OR DNF:(Yellow dog updater)
- 
- #### Lab set-up on server side
- * install the package vsftpd by using rpm 
- * check the status of vsftpd.service
-
-  ```
-  cd /media/AppStream/packages/
-  rpm -ivh /media/AppStream/packages/vsftpd
-  systemctl status vsftpd
-  systemctl enable --now vsftpd.service
-  ```
- * copy the whole mount directory into one directory 
-    ```
-    cp -rvf /media /var/ftp/pub/rhel8
-    ```
   
-  vim /etc/vsftpd/vsftpd.conf
+  for example:
+* date and mount commands
+
+* which date
+  /usr/bin/date
+* which mount
+  /usr/bin/mount
+   
+  ![peview](images/sftw1.PNG)
+
+* find the path of the corrcupted command
+     
+* cd /media/BaseOs/Packages
+* rpm -qf /usr/bin/mount   
+* rpm -ivh coreutils-8.30-12.el8.x86_64.rpm --force
+  
+  ![peview](images/sftw2.PNG)
+
+* check how many configuration files
+  
+* rpm -qa |wc -l (configuration files list)
+* rpm -qlc sudo (query list configuration)
+* rpm -qld sudo (query list documentation)
+  
+#### YUM OR DNF:(Yellow dog updater)
+
+#### Lab set-up on server side:
+
+* install the package vsftpd by using rpm 
+* check the status of vsftpd.service
+
+* cd /media/AppStream/packages/
+* rpm -ivh /media/AppStream/packages/vsftpd
+* systemctl status vsftpd
+* systemctl enable --now vsftpd.service
+  
+* copy the whole mount directory into one directory 
+    
+* cp -rvf /media /var/ftp/pub/<name_folder>
+    
+* vim /etc/vsftpd/vsftpd.conf
   ```
   # Allow anonymous FTP? (Beware - allowed by default if you comment this out).
     anonymous_enable=YES
   ```  
 * check and the firewall
 
- ```
- fiewall-cmd --list-all
- firewall-cmd --add-service=ftp --permanent
- firwall-cmd --reload
- services: cockpit dhcpv6-client ftp ssh
- ```  
-#### From server side
+* fiewall-cmd --list-all
+* firewall-cmd --add-service=ftp --permanent
+* firwall-cmd --reload
+ 
 * configure the repository file
- .vim /etc/yum.repos.d/my.repo
+
+* vim /etc/yum.repos.d/my.repo
   ```
   [AppStream]
   name=Local_AppStream_repo
@@ -134,13 +118,15 @@
   gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 
   ``` 
-*  check weather file fuctioning or not
-  ```
-  dnf clean all
-  dnf provides zsh/ftp/httpd
-  ``` 
-#### From client side
+* check weather file fuctioning or not
+  
+* dnf clean all
+* dnf provides zsh/ftp/httpd
+   
+#### From client side:
 * configure the repository file
+
+* vim /etc/yum.repos.d/cl.repo
  ```
  [AppStream]
  name=FTP_AppStream_repo
@@ -156,28 +142,22 @@
  enabled=1
  gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
  ```
- .dnf clean all
- .dnf provides zsh
+* dnf clean all
+* dnf provides zsh
 
-* to test ftp working or not in command prompt
-  .ftp 192.168.10.60
+* test ftp working or not in command prompt
+* ftp 192.168.10.60
    ftp
    ls
 
-*  AppStream
-   installing packages only for both server and client machines
-   BaseOs
-   installing packages only for server machine 
- 
-  ```
-  dnf repolist
-  dnf list
-  dnf list installed
-  dnf install zsh -y (BaseOS)
-  dnf intall httpd -y (AppStream)
-  dnf update httpd/zsh
-  dnf info httpd/zsh
-  dnf remove httpd/zsh
-  dnf grouplist
-  ```
+* dnf repolist
+* dnf list
+* dnf list installed
+* dnf install zsh -y (BaseOS)
+* dnf intall httpd -y (AppStream)
+* dnf update httpd/zsh
+* dnf info httpd/zsh
+* dnf remove httpd/zsh
+* dnf grouplist
+  
  

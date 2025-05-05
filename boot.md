@@ -20,7 +20,8 @@
    vim /etc/default/grub
    ``` 
    ![preview](images/boot1.PNG)
- * after changes system boot times for permanent
+   cat /etc/default/grub |grep -i grub_timeout |sed '/GRUB_TIMEOUT/s/5/10/' |sed -e 's/^/#/'
+ * after changes system boot timings to fix  permanent
    ```
    grub2-mkconfig -o /boot/grub2/grub.cfg
    ```  

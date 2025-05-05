@@ -15,14 +15,15 @@
   partprobe
   ```
 
-* create a partitions with fdisk 
+* create a partitions with fdisk cammand
 
-* check how many partitions 
-  ```
-   fdisk -l
-   ```
+* check how many partitions are created
 
-* make a new partition first create extended partition  and after than create logical partitions 
+    ```
+    fdisk -l
+    ```
+
+* make a new partition first create extended partition after than create a logical partitions 
 
   ```
   fdisk /dev/sda
@@ -39,19 +40,21 @@
 
   ```
   lsblk -f = it's shows file-system and mount-point directory
+
   blkid = it's shows every uuid for partition /dev/sda (1,2,3...)
   df -h = 488M  780K  452M   1% /test
   df -hT = /dev/sda5      ext4      488M  780K  452M   1% /test
   ```
-* format the file system to the partition ext4/xfs /dev/sda5
+* format the file system to the partition ext4/xfs for new partition /dev/sda5
 
   ![preview](images/disk4.PNG)
 
 * create a new directory
-* mount the directory with partition number /dev/sda 
+* mount the directory for new existing partition /dev/sda 
 
   ```
   mount /dev/sda5 /test
+
   ```
   ![preview](images/disk5.PNG)
 * mount |tail -5  
@@ -59,7 +62,6 @@
 
 * make a permanent mounting for a new partition in  `fstab`
 
-  
 *  vim /etc/fstab
   
   ![preview](images/disk7.PNG)
@@ -72,14 +74,17 @@
   defaults-->mount option
   0 0-->dumping,check squence (fsck)
   ```
+
 * mention uuid, dir, ext4/xfs, defaults 0 0
 * after than we execute the command
+
   ```
   mount -a
   ```
   ![preview](images/disk9.PNG)
 
 * umount & remount
+
   ```
   umount /test
   mount /dev/sda5
@@ -108,7 +113,9 @@
  ck-current activities
  ```
 * permanent mounting in fstab
+  
   vim /etc/fstab
+
   ```
   UUID      mount<directory>     filesystem <ext4/xs>  
   
@@ -140,7 +147,7 @@
   ![preview](images/disk14.PNG)
   ![preview](images/disk15.PNG)
 
-* to remove the partition 
+*  remove the partition 
   ![preview](images/disk16.PNG)
 
 * formating ,mounting same as above images (images/disk4)

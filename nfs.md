@@ -114,7 +114,7 @@
 ## SAMBA SERVER
 
 ### for linux machine 192.168.10.61
-### package:samba
+### daemon:samba
 ### port no: 449
 ### configuration file:.cat /etc/samba/smb.conf.example
                        :.cat /etc/samba/smb.conf
