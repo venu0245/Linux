@@ -130,6 +130,7 @@
 * when we poweron the machine system will be booting then
 * poweron
 * skip the booting 
+### updatea
   ```
   CONTROL-D
   vim /etc/fstab
