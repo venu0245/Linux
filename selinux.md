@@ -42,8 +42,8 @@
   chcon -t public_content_t selinux
   ls -lZ selinux
   ```
-*  remove the permission of the file
-* in the directory have files to remove the permissions
+*  remove the permissions of the file
+* in the directory have a files to remove the permissions
   
   ```
   restorecon -V <name_file>

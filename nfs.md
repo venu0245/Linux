@@ -6,7 +6,7 @@
 
 ### Lab set-up on server side (192.168.10.60)
 
-* To commnicate from server to any other machines like 192.168.10.61 ,62
+* To commnicate from server to any client machines like 192.168.10.61 ,62
 * create a directory name as </nfs>
  ```
  .mkdir /nfs
@@ -53,7 +53,7 @@
   ```     
 
 * create a directory name as </nfscl
-* it seems when server upload a data client can be recieve the data
+* it seems when server upload a data from client can be recieve the data from server 
   .mkdir /nfsc
   .mount -t nfs 192.168.10.60:/nfs /nfscl
   .mount |tail -4
@@ -62,7 +62,7 @@
   .ls
   .umount -f /nfscl
   ```
-* if remove the directory first `umount-directory` after then we can  remove
+* if remove the directory first `umount-directory` after then we can remove
 
 
  #### for permanent mounting 
@@ -76,7 +76,7 @@
  
 #### for auto mounting
 * auto-mounting means when we inside the directory to automatical mount the server
-* we can install a package `autofs.serverice`
+* we can install a package `autofs.service`
 * dnf install autofs -y
 * vim /etc/auto.master
   ```

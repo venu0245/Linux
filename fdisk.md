@@ -15,7 +15,7 @@
   partprobe
   ```
 
-* create a partitions with fdisk cammand
+* create a partitions with `fdisk` cammand
 
 * check how many partitions are created
 
@@ -39,18 +39,18 @@
   ![preview](images/disk3.PNG)
 
   ```
-  lsblk -f = it's shows file-system and mount-point directory
+  lsblk -f=>it's shows list of uuids and type of file-system and mount-point directory
 
-  blkid = it's shows every uuid for partition /dev/sda (1,2,3...)
-  df -h = 488M  780K  452M   1% /test
-  df -hT = /dev/sda5      ext4      488M  780K  452M   1% /test
+  blkid=>it's shows only uuids /dev/sda (1,2,3...)
+  df -h=> 488M  780K  452M   1% /test
+  df -hT=> /dev/sda5      ext4      488M  780K  452M   1% /test
   ```
 * format the file system to the partition ext4/xfs for new partition /dev/sda5
 
   ![preview](images/disk4.PNG)
 
 * create a new directory
-* mount the directory for new existing partition /dev/sda 
+* mount the directory for new existing partition like /dev/sda4 
 
   ```
   mount /dev/sda5 /test
@@ -68,10 +68,10 @@
   ![preview](images/disk8.PNG)
 
   ```
-  UUID-->device name
-  /dir-->mount point
-  ext4/xfs-->file system
-  defaults-->mount option
+  UUID-=>device name
+  /dir-=>mount point
+  ext4/xfs=>file system
+  defaults=>mount option
   0 0-->dumping,check squence (fsck)
   ```
 
@@ -90,7 +90,7 @@
   mount /dev/sda5
   ```
 
-* someone user login into mount directory, it can be editing the mount directory in that files 
+* someone user login and enter into mount directory
  
  ```
  lsof /test
@@ -99,7 +99,7 @@
 
   ![preview](images/disk12.PNG)
 
-* send the message to the user logout for the directory
+* sending the message to the user who enter into the directory
  
  ```
  write venu
@@ -119,18 +119,17 @@
   ```
   UUID      mount<directory>     filesystem <ext4/xs>  
   
-  defaults(mount option)  0 0(dumping,check sequence fsck)
+  defaults (mount option)  0 0(dumping,check, sequence fsck)
 
   ```
-* after permanent mounting,we execute a command as 
+* after permanent mounting,we can execute a command as 
   ```
   mount -a
   ```
 * troubleshoot in `fstab` when enter the wrong data in fstab
-* when we poweron the machine system will be booting then
+* when we poweron the machine system will be booting then fix the error in fstab and
 * poweron
 * skip the booting 
-### updatea
   ```
   CONTROL-D
   vim /etc/fstab

@@ -6,11 +6,11 @@
   volume group (VG)
   logical volume (LV)
  ```
-* minium size is to create the physical volume `512 MB`
+* minimum size is to create the physical volume `512 MB`
 * each extend size is `4MB`
 * one extend size is occupies `metadate` stores the `PV'S,VG'S,&,LV'S`
 
-* to calculate the sizes size/4
+* calculate the sizes size/4
 
 * create a physical volume PV
 * to convert the lvm code  `8e` linux lvm
@@ -44,7 +44,7 @@
   ![preview](images/lvm5.PNG)
   ![preview](images/lvm6.PNG)
 
-* to remove the `PV'S ,VG'S,LV'S`
+* remove the `PV'S ,VG'S,LV'S`
 
   ```
   pvremove /dev/sda7
@@ -52,12 +52,12 @@
   lvremove test1lv
   ```
 
-### EXTEND THE VOLUME SIZES ONE DISK TO ANOTHER DIFFERENT DISK
+### EXTEND THE VOLUME SIZE ONE DISK TO ANOTHER  DISK
 * create two physical volume's and 
 * create one volume group
 * create logical volume
-*  to extend the volume group to the physical volume
-* to resize/reduce to the volume group
+* extend the volume group to the physical volume
+* resize/reduce to the volume group
 
 * `/dev/sda to /dev/sdb`
 
@@ -73,7 +73,7 @@
 *  fdisk -l
   ![preview](images/lvm7.PNG)
 
-* to extend the `logical volume group` extisting the physical volume `sdb7 to sdb4`
+* extend the `logical volume group` extisting the physical volume `sdb7 to sdb4`
 
    ```
    lvextend -L +200M /dev/testvg/test1lv -r
@@ -88,18 +88,19 @@
 * mounting,file system permanent mounting same as previous above screenshot  
   ![preview](images/lvm4.PNG)
 * if we delete lvm & again restore the lvm
+  
   ```
-  .cd /etc/lvm
+   cd /etc/lvm
   ls
       archive  backup  cache  lvm.conf  lvmlocal.conf  profile
-  .cd /etc/lvm/archive
+   cd /etc/lvm/archive
 
-  .ls -ltr
-  .vgcfgrestore -t testvg -f <file-name>
+   ls -ltr
+   vgcfgrestore -t testvg -f <file-name>
   ```
   ![preview](images/lvm13.PNG)
 
-* to activate `LVM`
+*  activate `LVM`
   ```
    lvchange -a y /dev/testvg/test1lv
   ```
@@ -135,7 +136,7 @@
     ls -ltr
     vgcfgrestore -t testvg -f testvg_00009-960783674.vg 
     ```
-* to activate for lvm
+*  activate for lvm
   ```
   lvchange -a y /dev/testvg/testlv
   ```       

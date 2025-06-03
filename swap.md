@@ -63,7 +63,7 @@
   ```
   swapon /swapfile
   chmod 600 /swapfile
-  mkswapfile /swapfile
+  mkswap /swapfile
   swapon /swapfile
   df -h /swapfile
   du -h /swapfile
