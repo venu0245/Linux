@@ -5,28 +5,29 @@
    passwd u3
    u3:x:1005:1005::/home/u3:/bin/bash
    ```
-* every user as a unique id generate
+* every user as a unique id generates
 * change the unique id for a user and change  the shell for user
   ![preview](images/user0.PNG)
 
 * to convert one user to another user
   ```
   su u2
-  passwd (as a user password)
+  passwd (another user password)
   ```
-* normal user conver to root user
+* normal user convert to root user
   ```
   su -
   passwd (as root password)
   ```  
-* root user can lock the normal user (u3)
+* root user can lock and unlock the normal user (u3)
   ```
   usermod --help
   usermod -L u3
+  usermod -u u3
+  passwd -S u3
   ```  
   ![preview](images/user1.PNG)
 
-* root user can lock the normal user (u3) 
   ![preview](images/user2.PNG)
 
 * how to check user's lock or unlock
@@ -48,7 +49,7 @@
   .usermod -S /sbin/nologin (nologin)
   .usermod -s /bin/bash (login)
   ```
-* check the user last login password details  
+* checking user login password details  
   ```
   chage --help
   chage -l u3 (user-name)
@@ -56,18 +57,18 @@
   ```
  ![preview](images/user5.PNG)
  
- * to rename the user
+ * rename the user
   ```
   usermod -l <new_name> <old_name>
   ``` 
   ![preview](images/user6.PNG)
   
-*  when user's login immediately display the message 
+*  when user's login immediately display the popup message 
   ```
   vim /etc/motd
   motd-->message of the day
   ```
- * to delete the user
+ * delete the user
    ```
    userdel (user-name)
    in home directort

@@ -151,9 +151,9 @@ connected to the system. Examples are ifcfg-enp0s3
 
 * modify the json template with connection name `team` 
  
-  ```
- .nmcli connection modify nic config '{"runner": {"name":"loadbalance"}}'
- ``` 
+  
+* nmcli connection modify nic config '{"runner": {"name":"loadbalance"}}'
+  
 * nmcli con up nic
 
 * teamdctl `team` state  team=>master(device_name)

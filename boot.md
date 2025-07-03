@@ -28,8 +28,8 @@
 
 ##### Defaults run levels modes:
   
-  .command line run level mode
-  .graphical run level mode 
+* command line run level mode
+* graphical run level mode 
   ```
   who -r
   systemctl get-defaults
@@ -59,6 +59,7 @@
   chroot /sysroot
   passwd
   touch /.autorelable
+  exit
   exit
 
   ```

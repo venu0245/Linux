@@ -6,7 +6,7 @@
 
 ### Lab set-up on server side (192.168.10.60)
 
-* To commnicate from server to any client machines like 192.168.10.61 ,62
+* To commnicate from the server to any client machines like 192.168.10.61 ,192.168.10.62
 * create a directory name as </nfs>
  ```
  .mkdir /nfs
@@ -14,7 +14,7 @@
  .ls -ld /nfs
  .chmod 777 /nfs
  ```
-* why do full permission for directory to access to another machines 
+* why do full permission for directory to the access to another machines to connect that server and directory
 
  ```
   vim /etc/exports
@@ -33,7 +33,7 @@
  ```
 * if any changes in configuration file we can restart the service 
 
-* add services {nfs,mountd rpc-bind}
+* add firewall {nfs,mountd rpc-bind}
   ```
    .firewall-cmd --list-all
    .firewall-cmd --add-service=nfs --permanent
@@ -48,12 +48,12 @@
   showmount -e 192.168.10.60
   
   ```
-      Export list for 192.168.10.60:
-       /nfs (everyone)
+    Export list for 192.168.10.60:
+     /nfs (everyone)
   ```     
 
 * create a directory name as </nfscl
-* it seems when server upload a data from client can be recieve the data from server 
+* it seems when server upload a data to client can be recieve the data from server 
   .mkdir /nfsc
   .mount -t nfs 192.168.10.60:/nfs /nfscl
   .mount |tail -4
@@ -65,7 +65,7 @@
 * if remove the directory first `umount-directory` after then we can remove
 
 
- #### for permanent mounting 
+ #### permanent mounting 
   .vim /etc/fstab
   ```
     192.168.10.60:/nfs   /nfscl   nfs    defaults 0 0
@@ -74,7 +74,7 @@
  .mount -a
  .mount |tail -4
  
-#### for auto mounting
+#### auto mounting
 * auto-mounting means when we inside the directory to automatical mount the server
 * we can install a package `autofs.service`
 * dnf install autofs -y
@@ -103,7 +103,7 @@
 * can outside the directory
   .cd 
 
-* observe the mount point for mention the timeout
+* observe the mount point for mention the timeout value
  .mount |tail -4
 
 

@@ -5,22 +5,22 @@
   .disable
 
 * types:  
-  .discretionary acess control
+  .discretionary access control
   .mandatory access control
 * Temporary changing:
 
   ```
   setenforce permissive
   getenforce
-  setatus=>full-detail
+  setatus=>full-details
   ```
   ![preview](images/selnx.PNG)
 
-*  set enforcing/permissive modes
+*  set enforcing/permissive mode
 
   ![preview](images/selnx0.PNG)
 
-* if system reboots/shuntdown automatically changing the enforcing mode
+* when system reboots/shuntdown automatically changing the enforcing mode
 
 * permanent change:
 
@@ -42,8 +42,8 @@
   chcon -t public_content_t selinux
   ls -lZ selinux
   ```
-*  remove the permissions of the file
-* in the directory have a files to remove the permissions
+*  remove the permissions in the file
+* in the directory have a files to remove the permissions for files
   
   ```
   restorecon -V <name_file>
@@ -56,7 +56,7 @@
 
 * in directory have files to apply public access
   ```
-  chcon -Rt public_content_t user
+  chcon -Rt public_content_t <dir_name>
   ```
   ![preview](images/selnx4.PNG)
 
@@ -70,7 +70,7 @@
 * default context file stored in
   
   
-*  cat /etc/selinux/targeted/contexts/files/file_contexts.local
+* cat /etc/selinux/targeted/contexts/files/file_contexts.local
     
 * if we give samba share/httpd access to a file
 
@@ -125,16 +125,16 @@ the application
 
 * connect any server/protocal 
 
-* temporary mount to connect server:  
+* temporary mount to connect server  
 
 * getsebool -a |grep -i ftp* 
 * setsebool ftpd_anon_write on
 
 * permament mount to connect serer:
 
- semanage boolean -l |grep -i ftp
+* semanage boolean -l |grep -i ftp
 
- setsebool -p ftpd_anon_write on
+* setsebool -p ftpd_anon_write on
   
   ![preview](images/selnx12.PNG)
   

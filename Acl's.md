@@ -13,9 +13,9 @@
 * group: setgid=>g+s
 * other: o+t=>stiky bit
 
-* root can change the password for user
-* normal user can be change the password without applying u-s id
-* normal user connot be change the password with applying u+s id 
+* root user can be change the password for normal user
+* normal user can be change the password without applying `u-s` id
+* normal user connot be change the password with applying `u+s`id 
 
 * check the location of the command
 
@@ -63,7 +63,7 @@
 * owner creates a file and normal user enter into direcctory see the data 
   ![preview](images/acl6.PNG)
 
-* multiples user's enter into /sap directory both each other creates a file one user is read/delete for other user file same as another user.if their is no security for the directory
+* multiples user's enter and edit the /sap directory folder both each other creates a file one user is read/delete for other user file same as another user.if their is no security for the directory
 
  ![preview](images/acl7.PNG)
 
@@ -119,7 +119,7 @@ cannot delete the files one to one user
 * for directory:
   mkdir app
 * getfacl app  
-* setfacl -m u:u1:wx,u:u2:rx g:g1:wr, g:g2:r `app`
+* setfacl -Rm u:u1:wx,u:u2:rx g:g1:wr, g:g2:r `app`
 
 * in the directory multiple files:
 * setfacl -Rm u:u1:wx,u:u2:rx g:g1:wr, g:g2:r `app/file1{1..3}`

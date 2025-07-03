@@ -12,10 +12,11 @@
 * tail /etc/shadow >>out1
   ![preview](images/re2.PNG)
 
-* see the i/p & capature by using `tee` command
+* see the i/p & capature the o/p by using `tee` command
+* ps -elf |tail -5 |tee out2
  ![preview](images/re3.PNG)
 
-* `ls -l` have one file and in that no file
+* `ls -l` have available files and in that list  there is no existing files
 *  ls -l test.sh test1.sh `&>out3`
  ![preview](images/re4.PNG) 
  
@@ -24,7 +25,7 @@
 
 * ls -l test app 2>&1 `file_name` for testing purpose
 * app is existing file
-* test is not existing file
+* test is not available file
 
 * ls -l test app |tee `file_name` capature the both inputs into a file and show 
 

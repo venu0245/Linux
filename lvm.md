@@ -12,25 +12,25 @@
 
 * calculate the sizes size/4
 
-* create a physical volume PV
-* to convert the lvm code  `8e` linux lvm
+* create a physical volume (PV)
+* converted into lvm code is  `8e` linux lvm
 
 * create a partition for volumes
   ```
-  fdisk /dev/sda
-   n
-   t
-   l
-   8e (lvm)
-   w
+   fdisk /dev/sda
+   n=>new
+   t=>change type
+   L=>list of codes 
+   8e=> for (lvm)
+   w=>save and quite
   ```
   ![preview](images/lvm0.PNG)
   ```
   pvcreate /dev/sda7 
   vgcreate testvg /dev/sda7
   lvcreate -L 300M -n test1lv testvg
-  formate the file system ext4
-  mount the partition to create a pv,vg,lv
+  formate the file system 'ext4'
+  mount the partition from create a pv,vg,lv
   mount |tail -4
   ```
   ![preview](images/lvm1.PNG)
@@ -91,7 +91,7 @@
   
   ```
    cd /etc/lvm
-  ls
+   ls
       archive  backup  cache  lvm.conf  lvmlocal.conf  profile
    cd /etc/lvm/archive
 
@@ -107,6 +107,8 @@
   ![preview](images/lvm14.PNG)
 
 ### move the data one pv to anothother pv
+* create two physical volume
+* extend the volume group to physical volume
 * pvmove /dev/sda7 /dev/sdb4
   ![preview](images/lvm15.PNG) 
   ```
@@ -130,22 +132,27 @@
   vgremove -f testvg
   lvremove -f test1lv
   ```  
-* if lv delete and restore again
+* if lv delete and restore back again
     ```
+    cd /etc/lvm
+    ls
+       archive  backup  cache  lvm.conf  lvmlocal.conf  profile
+
     cd /etc/lvm/archieve
     ls -ltr
-    vgcfgrestore -t testvg -f testvg_00009-960783674.vg 
-    ```
-*  activate for lvm
-  ```
-  lvchange -a y /dev/testvg/testlv
-  ```       
+    vgcfgrestore testvg -f testvg_00009-960783674.vg 
+    
+   activate for lvm
+   lvchange -a y /dev/testvg/testlv
+   ```       
 * Note:-
- .if we already volume group/logical volume as a name
- .we can delete that volumes in
-  ```
-  cd /etc/lvm
-  ls
+ .if already existing volume group/logical volumes 
+ .unfortunatly volumes are messup we can restore back again 
+ ```
+ . cd /etc/lvm/archieve
+ . ls -ltr
+ .  vgcfgrestore <volume group_name> -f latest time and date of the vg file
+ .lvchange -a y /dev/appvg/applv
   ```  
   
 
