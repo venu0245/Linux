@@ -1,3 +1,4 @@
+* thersold value is 85% settled value value space and alterts in servicenow tool
 * login into terminal and after than check for kernal version
 connect to redhat developer website 
  ```
